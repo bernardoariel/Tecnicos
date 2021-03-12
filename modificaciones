@@ -1,0 +1,33 @@
+ALTER TABLE `ventas` ADD `remito` TEXT NULL DEFAULT NULL AFTER `seleccionado`;
+
+CREATE TABLE `remitos` (
+  `id` int(11) NOT NULL,
+  `idremito` int(11) NOT NULL,
+  `idcliente` int(11) NOT NULL,
+  `nombrecliente` text NOT NULL,
+  `datos` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `remitos`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `remitos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `remitos` ADD `total` DOUBLE NOT NULL AFTER `datos`;
+ALTER TABLE `remitos` ADD `fecha` DATE NOT NULL AFTER `idremito`;
+
+remitos.ajax.php
+ventas.controlador
+ventas.modelo
+
+remitos.php
+
+plantilla.php
+
+INSERT INTO `nrocomprobante` (`id`, `nombre`, `numero`) VALUES (NULL, 'REMITO', '0');
+
+elegirremitos.php
+
+
+
+
