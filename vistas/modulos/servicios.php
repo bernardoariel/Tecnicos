@@ -1,3 +1,16 @@
+<?php
+
+  if (isset($_GET["vista"])){
+
+    $vista = $_GET["vista"];
+
+  }else{
+
+    $vista = "pendiente";
+
+  }
+  
+?>
 <div class="content-wrapper">
 
   <section class="content-header">
@@ -22,16 +35,6 @@
 
     <div class="box">
 
-      <div class="box-header with-border">
-
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarServicio">
-
-          Agregar servicios
-
-        </button>
-
-
-      </div>
 
       <div class="box-body">
 
@@ -39,11 +42,35 @@
           <!-- Custom tabs (Charts with tabs)-->
           <div class="nav-tabs-custom">
             <!-- Tabs within a box -->
-            <ul class="nav nav-tabs pull-right">
-              <li class="active"><a href="#pendientes" data-toggle="tab">Pendientes</a></li>
-              <li><a href="#reparando" data-toggle="tab">En Reparacion</a></li>
-              <li><a href="#terminado" data-toggle="tab">Terminado</a></li>
-              <li class="pull-left header"><i class="fa fa-inbox"></i> Servicios</li>
+            <ul class="nav nav-tabs pull-right" id="servicios-tab" >
+
+              <?php if ($vista=="pendiente"): ?>
+                <li class="active"><a href="#pendientes" data-toggle="tab">Pendientes</a></li>
+                <li><a href="#reparando" data-toggle="tab">En Reparacion</a></li>
+                <li><a href="#terminado" data-toggle="tab">Terminado</a></li>
+                
+              <?php endif ?>
+
+              <?php if ($vista=="reparacion"): ?>
+                <li><a href="#pendientes" data-toggle="tab">Pendientes</a></li>
+                <li class="active"><a href="#reparando" data-toggle="tab">En Reparacion</a></li>
+                <li><a href="#terminado" data-toggle="tab">Terminado</a></li>
+                
+              <?php endif ?>
+
+              <?php if ($vista=="terminado"): ?>
+                <li><a href="#pendientes" data-toggle="tab">Pendientes</a></li>
+                <li><a href="#reparando" data-toggle="tab">En Reparacion</a></li>
+                <li class="active"><a href="#terminado" data-toggle="tab">Terminado</a></li>
+                
+              <?php endif ?>
+                
+              <button class="btn btn-primary pull-left" data-toggle="modal" data-target="#modalAgregarServicio">
+                Agregar servicios
+              </button>
+
+              <li class="header pull-left" ><i class="fa fa-inbox"></i> Servicios</li>
+
             </ul>
             <div class="tab-content ">
               <!-- Morris chart - Sales -->

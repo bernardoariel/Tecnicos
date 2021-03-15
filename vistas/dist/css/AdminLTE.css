@@ -2627,7 +2627,9 @@ a:focus {
 }
 .nav-tabs-custom > .nav-tabs > li.active {
   border-top-color: #3c8dbc;
+
 }
+
 .nav-tabs-custom > .nav-tabs > li.active > a,
 .nav-tabs-custom > .nav-tabs > li.active:hover > a {
   background-color: #fff;
