@@ -1,3 +1,52 @@
+<?php
+
+  $item = null;
+  $valor = null;
+  $orden = null;
+  $forma = null;
+  $estado = 1;
+
+  $orden = "id";
+  $forma = "ASC";
+
+  $serviciosPendientes = ControladorServicios::ctrMostrarServicios($item, $valor, $orden, $forma,$estado);
+  $cantidadPendientes = count($serviciosPendientes);
+
+  $item = null;
+  $valor = null;
+  $orden = null;
+  $forma = null;
+  $estado = 2;
+  $orden = "id";
+  $forma = "ASC";
+ 
+        
+  $serviciosPendientes = ControladorServicios::ctrMostrarServicios($item, $valor, $orden, $forma,$estado);
+  $cantidadReparacion = count($serviciosPendientes);
+  
+  $item = null;
+  $valor = null;
+  $orden = null;
+  $forma = null;
+  $estado = 3;
+  $orden = "id";
+  $forma = "ASC";
+ 
+        
+  $serviciosPendientes = ControladorServicios::ctrMostrarServicios($item, $valor, $orden, $forma,$estado);
+  $cantidadTerminado = count($serviciosPendientes);
+
+  $estado = 4;
+  $fecha = date('Y-m-d');
+
+  $serviciosPendientes = ControladorServicios::ctrMostrarServiciosDelDia($estado,$fecha);
+  $totalPrecio = 0;
+  foreach ($serviciosPendientes as $key => $value) {
+    # code...
+    $totalPrecio =$totalPrecio+$value["precio"];
+  }
+  
+?>
 <div class="content-wrapper">
 
   <section class="content-header">
@@ -23,102 +72,122 @@
   <section class="content">
 
     <div class="row">
-      
-    <?php
 
-      switch ($_SESSION["perfil"]) {
-            case 'Administrador':
-              # code...
-             include "inicio/modificaciones-stock.php";
-              break;
-            case 'Administrativo':
-              # code...
-              include "inicio/cajas-superiores.php";
-              break;
-            case 'Vendedor':
-              # code...
-              include "inicio/cajas-superiores.php";
-              break;
-            case 'Tecnico':
-              # code...
-               include "reportes/caja-tecnico.php";
-              break;
+      <div class="col-sm-12 col-lg-3">
+
+        <div class="small-box bg-aqua">
+          
+          <div class="inner">
             
-           
-          }
-   
+            <h3><?php echo $cantidadPendientes; ?></h3>
 
-    ?>
+            <p>Trabajos Pendientes</p>
+          
+          </div>
+          
+          <div class="icon">
+            
+            <i class="fa fa-android"></i>
+          
+          </div>
+          
+          <a href="index.php?ruta=servicios&vista=pendiente" class="small-box-footer">
+            
+            Más info <i class="fa fa-arrow-circle-right"></i>
+          
+          </a>
 
+        </div>
+
+      </div>
+
+      <div class="col-sm-12 col-lg-3">
+
+        <div class="small-box bg-yellow">
+          
+          <div class="inner">
+            
+            <h3><?php echo $cantidadReparacion; ?></h3>
+
+            <p>En Reparacion</p>
+          
+          </div>
+          
+          <div class="icon">
+            
+            <i class="fa fa-cogs"></i>
+          
+          </div>
+          
+          <a href="index.php?ruta=servicios&vista=reparacion" class="small-box-footer">
+            
+            Más info <i class="fa fa-arrow-circle-right"></i>
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="col-sm-12 col-lg-3">
+
+        <div class="small-box bg-green">
+          
+          <div class="inner">
+            
+            <h3><?php echo $cantidadTerminado; ?></h3>
+
+            <p>Trabajos Terminados</p>
+          
+          </div>
+          
+          <div class="icon">
+            
+            <i class="fa fa-quote-left"></i>
+          
+          </div>
+          
+          <a href="index.php?ruta=servicios&vista=terminado" class="small-box-footer">
+            
+            Más info <i class="fa fa-arrow-circle-right"></i>
+          
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="col-sm-12 col-lg-3">
+
+        <div class="small-box bg-maroon">
+          
+          <div class="inner">
+            
+            <h3>$  <?php echo $totalPrecio; ?></h3>
+
+            <p> <?php echo count($serviciosPendientes); ?> Trabajos terminados en el día</p>
+          
+          </div>
+          
+          <div class="icon">
+            
+            <i class="fa fa-dollar"></i>
+          
+          </div>
+          
+          <a href="ventas" class="small-box-footer">
+            
+            Más info <i class="fa fa-arrow-circle-right"></i>
+          
+          </a>
+
+        </div>
+
+      </div>
+    
     </div> 
 
-     <div class="row">
-       
-        <div class="col-lg-8">
 
-          <?php
-
-          switch ($_SESSION["perfil"]) {
-            case 'Aministrador':
-              # code...
-              break;
-            case 'Administrativo':
-              # code...
-              include "reportes/grafico-ventas2.php";
-              break;
-            case 'Vendedor':
-              # code...
-              include "reportes/grafico-ventas2.php";
-              break;
-            case 'Tecnico':
-              # code...
-              // include "reportes/grafico-ventas2.php";
-              break;
-            
-           
-          }
-          
-
-          ?>
-
-        </div>
-
-        <div class="col-lg-4">
-
-          <?php
-
-           switch ($_SESSION["perfil"]) {
-            case 'Aministrador':
-              # code...
-              // include "reportes/grafico-ventas2.php";
-              break;
-            case 'Administrativo':
-              # code...
-              include "reportes/grafico-ventas.php";
-              break;
-            case 'Vendedor':
-              # code...
-              include "reportes/grafico-ventas.php";
-              break;
-            case 'Tecnico':
-              # code...
-              // include "reportes/grafico-ventas2.php";
-              break;
-            
-           
-          }
-           
-
-         
-
-          ?>
-
-        </div>
-
-       
-         </div>
-
-     </div>
 
   </section>
  

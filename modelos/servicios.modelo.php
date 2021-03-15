@@ -212,4 +212,17 @@ class ModeloServicios
   $stmt->close();
   $stmt = null;
  }
+
+ static public function mdlMostrarServiciosDelDia($tabla,$estado,$fecha){
+
+    echo "SELECT DATE_FORMAT(fecha,'%Y-%m-%d')mFecha ,estado,precio  FROM $tabla WHERE estado = $estado and fecha ='$fecha'";
+    $stmt = Conexion::conectar()->prepare("SELECT DATE_FORMAT(fecha,'%Y-%m-%d')mFecha ,estado,precio  FROM $tabla WHERE estado = $estado and fecha ='$fecha'");
+
+    // $stmt->bindParam(":estado", $estado, PDO::PARAM_INT);
+    // $stmt->bindParam(":fecha", $fecha, PDO::PARAM_STR);
+
+    $stmt->execute();
+ 
+    return $stmt->fetchAll();
+ }
 }
