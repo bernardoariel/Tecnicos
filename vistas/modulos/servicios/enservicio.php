@@ -4,14 +4,14 @@
          
          <tr>
            
-           <th>#</th>
-           <th style="width: 100px;">Cliente</th>
-           <th style="width: 60px;">Producto</th>
-           <th style="width: 100px;">Problema 1</th>
-           <th style="width: 50px;">Presupuesto</th>
-           <th>Reparacion</th>
-           <th style="width: 50px;">Precio</th>
-           <th style="width: 100px;">Acciones</th>
+          <th style="background-color:#FFD180">#</th>
+          <th style="width: 100px;background-color:#FFD180">Cliente</th>
+          <th style="width: 60px;background-color:#FFD180">Producto</th>
+          <th style="width: 100px;background-color:#FFD180">Problema 1</th>
+          <th style="width: 50px;background-color:#FFD180">Presupuesto</th>
+          <th style="background-color:#FFD180">Reparacion</th>
+          <th style="width: 50px;background-color:#FFD180">Precio</th>
+          <th style="width: 100px;background-color:#FFD180">Acciones</th>
 
          </tr> 
 

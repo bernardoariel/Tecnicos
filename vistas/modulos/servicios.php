@@ -20,18 +20,9 @@
 
   <section class="content">
 
-    <div class="box">
+    <div class="box box-danger">
 
-      <div class="box-header with-border">
-
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarServicio">
-
-          Agregar servicios
-
-        </button>
-
-
-      </div>
+      
 
       <div class="box-body">
 
@@ -43,8 +34,13 @@
               <li class="active"><a href="#pendientes" data-toggle="tab">Pendientes</a></li>
               <li><a href="#reparando" data-toggle="tab">En Reparacion</a></li>
               <li><a href="#terminado" data-toggle="tab">Terminado</a></li>
-              <li class="pull-left header"><i class="fa fa-inbox"></i> Servicios</li>
+              <button class="btn btn-primary pull-left" data-toggle="modal" data-target="#modalAgregarServicio">
+                Agregar servicios
+              </button>
+
+              <li class="header pull-left" ><i class="fa fa-inbox"></i> Servicios</li>
             </ul>
+            
             <div class="tab-content ">
               <!-- Morris chart - Sales -->
               <div class="chart tab-pane active" id="pendientes" style="position: relative;">

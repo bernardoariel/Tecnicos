@@ -212,4 +212,19 @@ class ModeloServicios
   $stmt->close();
   $stmt = null;
  }
+
+ static public function mdlMostrarServiciosDelDia($tabla,$estado,$fecha){
+    $fechaInicio = $fecha." 00:00:00";
+    $fechaFinal = $fecha." 23:59:59";
+    // echo "SELECT DATE_FORMAT(fecha,'%Y-%m-%d')mFecha ,estado,precio  FROM $tabla WHERE estado = $estado and fecha ='$fecha'";
+    // echo "SELECT * FROM $tabla WHERE estado = $estado and fecha BETWEEN '$fechaInicio' AND '$fechaFinal' ";
+    $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE estado = $estado and fecha BETWEEN '$fechaInicio' AND '$fechaFinal' ");
+
+    // $stmt->bindParam(":estado", $estado, PDO::PARAM_INT);
+    // $stmt->bindParam(":fecha", $fecha, PDO::PARAM_STR);
+
+    $stmt->execute();
+ 
+    return $stmt->fetchAll();
+ }
 }

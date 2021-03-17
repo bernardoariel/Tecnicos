@@ -3,8 +3,8 @@
 class ControladorServicios{
 
  /*=============================================
-	MOSTRAR SERVICIOS
-	=============================================*/
+  MOSTRAR SERVICIOS
+ =============================================*/
 
  static public function ctrMostrarServicios($item, $valor, $orden, $forma, $estado) {
 
@@ -17,7 +17,7 @@ class ControladorServicios{
 
  /*=============================================
 	CREAR CLIENTES
-	=============================================*/
+ =============================================*/
 
  static public function ctrNuevoServicio($datos){
 
@@ -92,7 +92,7 @@ class ControladorServicios{
 
  /*=============================================
 	EDITAR SERVICIO
-	=============================================*/
+=============================================*/
  static public function ctrEditarServicio($datos)
  {
 
@@ -192,13 +192,21 @@ class ControladorServicios{
 	MODIFICAR SERVICIO
 	=============================================*/
 
- static public function ctrModificarServicio($datos)
- {
+ static public function ctrModificarServicio($datos){
 
   $tabla = "servicios";
 
   $respuesta = ModeloServicios::mdlModificarServicio($tabla, $datos);
 
   return $respuesta;
+ }
+ 
+ static public function ctrMostrarServiciosDelDia($estado,$fecha){
+
+       $tabla = "servicios";
+
+       $respuesta = ModeloServicios::mdlMostrarServiciosDelDia($tabla,$estado,$fecha);
+
+       return $respuesta;
  }
 }
