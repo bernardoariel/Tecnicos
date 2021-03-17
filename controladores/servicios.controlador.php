@@ -3,6 +3,18 @@
 class ControladorServicios{
 
  /*=============================================
+  MOSTRAR TODOS LOS SERVICIOS
+ =============================================*/
+
+ static public function ctrMostrarServiciosTodos($item,$valor,$orden, $forma,$limite) {
+
+       $tabla = "servicios";
+
+       $respuesta = ModeloServicios::mdlMostrarServiciosTodos($tabla, $item,$valor, $orden, $forma,$limite);
+
+       return $respuesta;
+ }
+ /*=============================================
   MOSTRAR SERVICIOS
  =============================================*/
 

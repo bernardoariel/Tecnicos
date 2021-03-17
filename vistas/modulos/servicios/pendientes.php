@@ -65,9 +65,9 @@
 
                     echo '<div class="btn-group">
                             
-                            <button class="btn btn-warning btnVerServicioEditar" data-toggle="modal" data-target="#modalEditarServicio" idServicio="'.$value["id"].'" title="Editar servicio"><i class="fa fa-pencil"></i></button>
-                            <button class="btn btn-info btnReparar" idServicio="'.$value["id"].'" idUsuario="'.$_SESSION["id"].'"><i class="fa fa-wrench" title="Reparar Equipo"></i></button>
-                            <button class="btn btn-danger btnEliminarServicio" idServicio="'.$value["id"].'" title="Eliminar este Servicio"><i class="fa fa-times"></i></button>
+                            <button class="btn btn-warning btn-flat  btnVerServicioEditar" data-toggle="modal" data-target="#modalEditarServicio" idServicio="'.$value["id"].'" title="Editar servicio"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-info btnReparar btn-flat" idServicio="'.$value["id"].'" idUsuario="'.$_SESSION["id"].'"><i class="fa fa-wrench" title="Reparar Equipo"></i></button>
+                            <button class="btn btn-danger btnEliminarServicio btn-flat" idServicio="'.$value["id"].'" title="Eliminar este Servicio"><i class="fa fa-times"></i></button>
 
                           </div>'; 
 
@@ -97,9 +97,9 @@
 
                   echo '<div class="btn-group">
                           
-                          <button class="btn btn-warning btnVerServicioEditar" data-toggle="modal" data-target="#modalEditarServicio" idServicio="'.$value["id"].'" title="Editar servicio"><i class="fa fa-pencil"></i></button>
-                          <button class="btn btn-info btnReparar" idServicio="'.$value["id"].'" idUsuario="'.$_SESSION["id"].'"><i class="fa fa-wrench"  title="Reparar Equipo"></i></button>
-                          <button class="btn btn-danger btnEliminarServicio" idServicio="'.$value["id"].'" title="Eliminar este Servicio"><i class="fa fa-times"></i></button>
+                          <button class="btn btn-warning btnVerServicioEditar btn-flat" data-toggle="modal" data-target="#modalEditarServicio" idServicio="'.$value["id"].'" title="Editar servicio"><i class="fa fa-pencil"></i></button>
+                          <button class="btn btn-info btnReparar btn-flat" idServicio="'.$value["id"].'" idUsuario="'.$_SESSION["id"].'"><i class="fa fa-wrench"  title="Reparar Equipo"></i></button>
+                          <button class="btn btn-danger btnEliminarServicio btn-flat" idServicio="'.$value["id"].'" title="Eliminar este Servicio"><i class="fa fa-times"></i></button>
 
                         </div>'; 
 

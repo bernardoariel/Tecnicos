@@ -95,8 +95,8 @@
 
                   echo '<div class="btn-group">
                           
-                          <button class="btn btn-info btnAPendiente" idServicio="'.$value["id"].'" idUsuario="'.$_SESSION["id"].'" title="Devolver este Servicio"><i class="fa  fa-mail-reply-all"></i></button>
-                          <button class="btn btn-danger btnTerminarServicio" data-toggle="modal" data-target="#modalTerminarServicio" idServicio="'.$value["id"].'" idUsuario="'.$_SESSION["id"].'" title="Editar Servicio"><i class="fa fa-pencil"></i></button>
+                          <button class="btn btn-info btnAPendiente btn-flat" idServicio="'.$value["id"].'" idUsuario="'.$_SESSION["id"].'" title="Devolver este Servicio"><i class="fa  fa-mail-reply-all"></i></button>
+                          <button class="btn btn-danger btnTerminarServicio btn-flat" data-toggle="modal" data-target="#modalTerminarServicio" idServicio="'.$value["id"].'" idUsuario="'.$_SESSION["id"].'" title="Editar Servicio"><i class="fa fa-pencil"></i></button>
                           
                           
 

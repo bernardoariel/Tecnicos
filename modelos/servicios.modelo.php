@@ -2,17 +2,72 @@
 
 require_once "conexion.php";
 
-class ModeloServicios
-{
+class ModeloServicios{
+
+   /*=============================================
+	MOSTRAR PRODUCTOS
+	=============================================*/
+
+	static public function mdlMostrarServiciosTodos($tabla, $item, $valor, $orden, $forma,$limite){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+			$stmt -> execute();
+
+			return $stmt -> fetch();
+
+		}else{
+
+			if($orden == null){
+
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+				$stmt -> execute();
+
+				return $stmt -> fetchAll();
+
+			}else{
+
+            if($limite == null){
+
+               $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla order by $orden $forma");
+
+               $stmt -> execute();
+
+               return $stmt -> fetchAll();
+
+            }else{
+
+              
+               $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla order by $orden $forma limit $limite");
+
+               $stmt -> execute();
+
+               return $stmt -> fetchAll();
+            }
+
+				
+			}
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
 
  /*=============================================
 	MOSTRAR SERVICIOSD
 	=============================================*/
 
- static public function mdlMostrarServicios($tabla, $item, $valor, $orden, $forma, $estado)
- {
+ static public function mdlMostrarServicios($tabla, $item, $valor, $orden, $forma, $estado){
 
-  if ($item != null) {
+  if ($item != null){
 
    $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item AND estado=" . $estado);
 
@@ -21,16 +76,17 @@ class ModeloServicios
    $stmt->execute();
 
    return $stmt->fetch();
-  } else {
 
-   if ($orden == null) {
+  }else{
+
+   if ($orden == null){
 
     $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE estado = " . $estado . " order by $orden $forma ");
 
     $stmt->execute();
 
     return $stmt->fetchAll();
-   } else {
+   }else{
 
     $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE estado = " . $estado . " order by $orden $forma");
 
@@ -38,6 +94,7 @@ class ModeloServicios
 
     return $stmt->fetchAll();
    }
+
   }
 
   $stmt->close();

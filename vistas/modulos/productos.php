@@ -20,11 +20,11 @@
 
     <section class="content">
 
-        <div class="box">
+        <div class="box box-warning">
 
             <div class="box-header with-border">
 
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto">
+                <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#modalAgregarProducto">
 
                     Agregar producto
 
@@ -84,9 +84,9 @@
 
                                     echo '<div class="btn-group">
                             
-                                        <button class="btn btn-warning btnVerProductoEditar" data-toggle="modal" data-target="#modalEditarProducto" idProducto="' . $value["id"] . '"><i class="fa fa-pencil"></i></button>
+                                        <button class="btn btn-warning btnVerProductoEditar btn-flat" data-toggle="modal" data-target="#modalEditarProducto" idProducto="' . $value["id"] . '"><i class="fa fa-pencil"></i></button>
 
-                                        <button class="btn btn-danger btnEliminarProducto" idProducto="' . $value["id"] . '"><i class="fa fa-times"></i></button>
+                                        <button class="btn btn-danger btnEliminarProducto btn-flat" idProducto="' . $value["id"] . '"><i class="fa fa-times"></i></button>
 
                                     </div>';
                                 }
@@ -109,9 +109,9 @@
 
                                             echo '<div class="btn-group">
                           
-                                              <button class="btn btn-warning btnVerProductoEditar" data-toggle="modal" data-target="#modalEditarProducto" idProducto="' . $value["id"] . '"><i class="fa fa-pencil"></i></button>
+                                              <button class="btn btn-warning btnVerProductoEditar btn-flat" data-toggle="modal" data-target="#modalEditarProducto" idProducto="' . $value["id"] . '"><i class="fa fa-pencil"></i></button>
 
-                                              <button class="btn btn-danger btnEliminarProducto" idProducto="' . $value["id"] . '"><i class="fa fa-times"></i></button>
+                                              <button class="btn btn-danger btnEliminarProducto btn-flat" idProducto="' . $value["id"] . '"><i class="fa fa-times"></i></button>
 
                                                   </div>';
                                     }
@@ -195,10 +195,10 @@
 
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+                    <button type="button" class="btn btn-default pull-left btn-flat" data-dismiss="modal">Salir</button>
 
                     <!-- <button type="submit" class="btn btn-primary">Guardar cliente</button> -->
-                    <button type="button" id="btnCrearProducto" class="btn btn-primary pull-right">Guardar Producto</button>
+                    <button type="button" id="btnCrearProducto" class="btn btn-primary pull-right btn-flat">Guardar Producto</button>
 
                 </div>
 
@@ -272,11 +272,11 @@
 
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+                    <button type="button" class="btn btn-default pull-left btn-flat" data-dismiss="modal">Salir</button>
 
                     <!-- <button type="submit" class="btn btn-primary">Guardar cliente</button> -->
 
-                    <button type="button" id="btnEditarProducto" class="btn btn-primary pull-right">Guardar Servicio</button>
+                    <button type="button" id="btnEditarProducto" class="btn btn-primary pull-right btn-flat">Guardar Servicio</button>
 
                 </div>
 

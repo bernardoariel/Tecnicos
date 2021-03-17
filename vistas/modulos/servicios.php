@@ -34,7 +34,7 @@
               <li class="active"><a href="#pendientes" data-toggle="tab">Pendientes</a></li>
               <li><a href="#reparando" data-toggle="tab">En Reparacion</a></li>
               <li><a href="#terminado" data-toggle="tab">Terminado</a></li>
-              <button class="btn btn-primary pull-left" data-toggle="modal" data-target="#modalAgregarServicio">
+              <button class="btn btn-primary pull-left btn-flat" data-toggle="modal" data-target="#modalAgregarServicio">
                 Agregar servicios
               </button>
 

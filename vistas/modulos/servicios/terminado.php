@@ -93,9 +93,9 @@
 
     echo '<div class="btn-group">
                           
-                  <button class="btn btn-info btnAServicio" idServicio="' . $value["id"] . '" idUsuario="' . $_SESSION["id"] . '" title="Devolver a Servicio"><i class = "fa  fa-mail-reply-all" > </i> </button>
+                  <button class="btn btn-info btnAServicio btn-flat" idServicio="' . $value["id"] . '" idUsuario="' . $_SESSION["id"] . '" title="Devolver a Servicio"><i class = "fa  fa-mail-reply-all" > </i> </button>
                   
-                  <button class="btn btn-danger btnEntregado" idServicio="' . $value["id"] . '" idUsuario="' . $_SESSION["id"] . '" title="Producto Entregado"><i class="fa  fa-external-link"></i></button>    
+                  <button class="btn btn-danger btnEntregado btn-flat" idServicio="' . $value["id"] . '" idUsuario="' . $_SESSION["id"] . '" title="Producto Entregado"><i class="fa  fa-external-link"></i></button>    
                           
            </div>';
 

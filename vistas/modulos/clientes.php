@@ -20,11 +20,11 @@
 
   <section class="content">
 
-    <div class="box">
+    <div class="box box-success">
 
       <div class="box-header with-border">
 
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente">
+        <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#modalAgregarCliente">
           
           Agregar cliente
 
@@ -94,9 +94,9 @@
 
                     echo '<div class="btn-group">
                             
-                            <button class="btn btn-warning btnVerClienteEditar" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
+                            <button class="btn btn-warning btn-flat btnVerClienteEditar" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
 
-                            <button class="btn btn-danger btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>
+                            <button class="btn btn-danger btn-flat btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>
 
                           </div>'; 
                   }   
@@ -125,9 +125,9 @@
 
                   echo '<div class="btn-group">
                           
-                          <button class="btn btn-warning btnVerClienteEditar" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
+                          <button class="btn btn-warning btn-flat btnVerClienteEditar" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
 
-                          <button class="btn btn-danger btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>
+                          <button class="btn btn-danger btn-flat btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>
 
                         </div>'; 
                 }   
@@ -256,10 +256,10 @@
 
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal">Salir</button>
 
           <!-- <button type="submit" class="btn btn-primary">Guardar cliente</button> -->
-          <button type="button" id="btnCrearCliente" class="btn btn-primary pull-right">Guardar Cliente</button>
+          <button type="button" id="btnCrearCliente" class="btn btn-primary pull-right btn-flat">Guardar Cliente</button>
 
         </div>
 
@@ -371,11 +371,11 @@
 
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal">Salir</button>
 
           <!-- <button type="submit" class="btn btn-primary">Guardar cliente</button> -->
 
-          <button type="button" id="btnEditarCliente" class="btn btn-primary pull-right" >Guardar cliente</button>
+          <button type="button" id="btnEditarCliente" class="btn btn-primary btn-flat pull-right" >Guardar cliente</button>
 
         </div>
 
