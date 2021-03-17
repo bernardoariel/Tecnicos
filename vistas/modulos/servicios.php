@@ -1,3 +1,16 @@
+<?php
+
+  if (isset($_GET["vista"])){
+
+    $vista = $_GET["vista"];
+
+  }else{
+
+    $vista = "pendiente";
+
+  }
+  
+?>
 <div class="content-wrapper">
 
   <section class="content-header">

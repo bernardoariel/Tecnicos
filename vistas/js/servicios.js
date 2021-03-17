@@ -133,7 +133,7 @@ $("#selectCliente").change(function(){
 		        $("#servicioCliente").val(respuesta["nombre"]);
 		        $("#servicioTelefono").val(respuesta["telefono"]);
 		        $("#servicioTelefono").select();
-				$("#servicioTelefono").focus();
+				    $("#servicioTelefono").focus();
 	
 		      }//SUCESS
 		})//AJAX
@@ -177,7 +177,7 @@ $("#selectCliente2").change(function(){
 		        $("#servicioCliente").val(respuesta["nombre"]);
 		        $("#servicioTelefono").val(respuesta["telefono"]);
 		        $("#servicioTelefono").select();
-				$("#servicioTelefono").focus();
+				    $("#servicioTelefono").focus();
 	
 		      }//SUCESS
 		})//AJAX
@@ -245,7 +245,7 @@ $("#btnCrearServicio").on("click", function(){
             focusConfirm:true
             }).then(function(result){
               if (result.value) {
-                window.location = "index.php?ruta=servicios&orden=fechacreacion";
+                window.location = "index.php?ruta=servicios&orden=fechacreacion&vista=pendiente";
               }
             })
             break;
@@ -260,7 +260,7 @@ $("#btnCrearServicio").on("click", function(){
               focusConfirm:true
               }).then(function(result){
               if (result.value) {
-                window.location = "servicios";
+                window.location = "index.php?ruta=servicios&vista=pendiente";
               }
             })
             break;
@@ -338,7 +338,7 @@ $(".tablaServicios tbody").on("click", "button.btnEliminarServicio", function(){
                               confirmButtonText: "Cerrar"
                               }).then(function(result){
                                 if (result.value) {
-                                  window.location = "servicios";
+                                  window.location = "index.php?ruta=servicios&vista=pendiente";
                                 }
                               })
                             }else{
@@ -349,7 +349,7 @@ $(".tablaServicios tbody").on("click", "button.btnEliminarServicio", function(){
                                 confirmButtonText: "Cerrar"
                                 }).then(function(result){
                                 if (result.value) {
-                                  window.location = "servicios";
+                                  window.location = "index.php?ruta=servicios&vista=pendiente";
                                 }
                               })
                             }
@@ -395,7 +395,7 @@ $(".tablaServicios").on("click", ".btnVerServicioEditar", function(){
         $("#servicioIdUsuarioEditar").val(respuesta["id_usuario_creacion"]);
         $("#servicioPresupuestoEditar").val(respuesta["presupuesto"]);
         $("#editarProductoSelect").html(respuesta["producto"]);
-		$("#editarProductoSelect").val(respuesta["id_producto"]);
+		    $("#editarProductoSelect").val(respuesta["id_producto"]);
       }//SUCESS
   })//AJAX
 
@@ -451,7 +451,7 @@ $("#btnEditarServicio").on("click", function(){
                       focusConfirm:true
                       }).then(function(result){
                             if (result.value) {
-                                window.location = "index.php?ruta=servicios&orden=fechacreacion";
+                                window.location = "index.php?ruta=servicios&orden=fechacreacion&vista=pendiente";
                             }
                       })
                       break;
@@ -466,7 +466,7 @@ $("#btnEditarServicio").on("click", function(){
                           focusConfirm:true
                       }).then(function(result){
                         if (result.value) {
-                            window.location = "servicios";
+                            window.location = "index.php?ruta=servicios&vista=pendiente";
                         }
                       })
                     break;
@@ -584,7 +584,7 @@ $(".tablaServicios tbody").on("click", "button.btnReparar", function(){
                                 
                                 if (result.value) {
 
-                                  window.location = "servicios";
+                                  window.location = "index.php?ruta=servicios&vista=reparacion";
 
                                 }
 
@@ -599,7 +599,7 @@ $(".tablaServicios tbody").on("click", "button.btnReparar", function(){
                                 }).then(function(result){
                                 if (result.value) {
 
-                                  window.location = "servicios";
+                                  window.location = "index.php?ruta=servicios&vista=reparacion";
                                 }
                               })
                             }
@@ -676,7 +676,7 @@ $(".tablaServicios tbody").on("click", "button.btnAPendiente", function(){
                                 
                                 if (result.value) {
 
-                                  window.location = "servicios";
+                                  window.location = "index.php?ruta=servicios&vista=pendiente";
 
                                 }
 
@@ -691,7 +691,7 @@ $(".tablaServicios tbody").on("click", "button.btnAPendiente", function(){
                                 }).then(function(result){
                                 if (result.value) {
 
-                                  window.location = "servicios";
+                                  window.location = "index.php?ruta=servicios&vista=pendiente";
                                 }
                               })
                             }
@@ -785,7 +785,7 @@ $(".btnModalTerminarServicio").on("click",function(){
                                 
                                 if (result.value) {
 
-                                  window.location = "servicios";
+                                  window.location = "index.php?ruta=servicios&vista=terminado";
 
                                 }
 
@@ -826,7 +826,7 @@ $(".tablaServicios tbody").on("click", "button.btnAServicio", function () {
           confirmButtonText: "Cerrar",
         }).then(function (result) {
           if (result.value) {
-            window.location = "servicios";
+            window.location = "index.php?ruta=servicios&vista=reparacion";
           }
         });
       } else {
@@ -837,7 +837,7 @@ $(".tablaServicios tbody").on("click", "button.btnAServicio", function () {
           confirmButtonText: "Cerrar",
         }).then(function (result) {
           if (result.value) {
-            window.location = "servicios";
+            window.location = "index.php?ruta=servicios&vista=reparacion";
           }
         });
       }
@@ -873,7 +873,7 @@ $(".tablaServicios tbody").on("click", "button.btnEntregado", function () {
           confirmButtonText: "Cerrar",
         }).then(function (result) {
           if (result.value) {
-            window.location = "servicios";
+            window.location = "index.php?ruta=servicios&vista=terminado";
           }
         });
       } else {
@@ -884,7 +884,7 @@ $(".tablaServicios tbody").on("click", "button.btnEntregado", function () {
           confirmButtonText: "Cerrar",
         }).then(function (result) {
           if (result.value) {
-            window.location = "servicios";
+            window.location = "index.php?ruta=servicios&vista=terminado";
           }
         });
       }

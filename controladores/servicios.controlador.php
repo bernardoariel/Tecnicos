@@ -221,4 +221,8 @@ class ControladorServicios{
 
        return $respuesta;
  }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b408387fb7614b8e3a1494efd7e53ed8f7f95d13

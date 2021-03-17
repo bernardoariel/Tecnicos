@@ -120,16 +120,13 @@ $empresa = ControladorEmpresa::ctrMostrarEmpresa($item, $valor);
   <!-- Select2 -->
   <script src="vistas/bower_components/select2/dist/js/select2.full.min.js"></script>
   <style type="text/css">
+
     .swal2-shown {
       display: flex;
       height: 100vh;
     }
 
-
   </style>
-
-
-
 
 </head>
 
@@ -172,7 +169,7 @@ CUERPO DOCUMENTO
         $_GET["ruta"] == "empresa" ||
         $_GET["ruta"] == "miempresa" ||
         $_GET["ruta"] == "productos" ||
-        $_GET["ruta"] == "losmodelos" ||
+        $_GET["ruta"] == "entregados" ||
         $_GET["ruta"] == "ctacorriente" ||
         $_GET["ruta"] == "buscar-venta-nro" ||
         $_GET["ruta"] == "buscar-venta-cliente" ||
