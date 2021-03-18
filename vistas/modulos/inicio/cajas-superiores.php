@@ -1,133 +1,170 @@
 <?php
 
-$item = null;
-$valor = null;
-$orden = "id";
+  $item = null;
+  $valor = null;
+  $orden = null;
+  $forma = null;
+  $estado = 1;
 
-$ventas = ControladorVentas::ctrSumaTotalVentas();
+  $orden = "id";
+  $forma = "ASC";
 
+  $serviciosPendientes = ControladorServicios::ctrMostrarServicios($item, $valor, $orden, $forma,$estado);
+  $cantidadPendientes = count($serviciosPendientes);
 
-$categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
-$totalCategorias = count($categorias);
+  $item = null;
+  $valor = null;
+  $orden = null;
+  $forma = null;
+  $estado = 2;
+  $orden = "id";
+  $forma = "ASC";
+ 
+        
+  $serviciosPendientes = ControladorServicios::ctrMostrarServicios($item, $valor, $orden, $forma,$estado);
+  $cantidadReparacion = count($serviciosPendientes);
+  
+  $item = null;
+  $valor = null;
+  $orden = null;
+  $forma = null;
+  $estado = 3;
+  $orden = "id";
+  $forma = "ASC";
+ 
+        
+  $serviciosPendientes = ControladorServicios::ctrMostrarServicios($item, $valor, $orden, $forma,$estado);
+  $cantidadTerminado = count($serviciosPendientes);
 
-$clientes = ControladorClientes::ctrMostrarClientes($item, $valor);
-$totalClientes = count($clientes);
+  $estado = 4;
+  $fecha = date('Y-m-d');
 
-$productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
-$totalProductos = count($productos);
-
+  $serviciosPendientes = ControladorServicios::ctrMostrarServiciosDelDia($estado,$fecha);
+  
+  $totalPrecio = 0;
+  foreach ($serviciosPendientes as $key => $value) {
+    # code...
+    $totalPrecio =$totalPrecio+$value["precio"];
+  }
+  
 ?>
 
 
+    
 
-<div class="col-lg-3 col-xs-6">
+<div class="col-sm-12 col-lg-3">
 
-  <div class="small-box bg-aqua">
-    
-    <div class="inner">
-      
-      <h3>$<?php echo number_format($ventas["total"],2); ?></h3>
+<div class="small-box bg-aqua">
 
-      <p>Ventas del día cta/corriente</p>
-    
-    </div>
-    
-    <div class="icon">
-      
-      <i class="ion ion-social-usd"></i>
-    
-    </div>
-    
-    <a href="ventas" class="small-box-footer">
-      
-      Más info <i class="fa fa-arrow-circle-right"></i>
-    
-    </a>
+<div class="inner">
 
-  </div>
+<h3><?php echo $cantidadPendientes; ?></h3>
+
+<p>Trabajos Pendientes</p>
 
 </div>
 
-<div class="col-lg-3 col-xs-6">
+<div class="icon">
 
-  <div class="small-box bg-green">
-    
-    <div class="inner">
-    
-      <h3><?php echo number_format($totalCategorias); ?></h3>
-
-      <p>Categorías</p>
-    
-    </div>
-    
-    <div class="icon">
-    
-      <i class="ion ion-clipboard"></i>
-    
-    </div>
-    
-    <a href="categorias" class="small-box-footer">
-      
-      Más info <i class="fa fa-arrow-circle-right"></i>
-    
-    </a>
-
-  </div>
+<i class="fa fa-android"></i>
 
 </div>
 
-<div class="col-lg-3 col-xs-6">
+<a href="index.php?ruta=servicios&vista=pendiente" class="small-box-footer">
 
-  <div class="small-box bg-yellow">
-    
-    <div class="inner">
-    
-      <h3><?php echo number_format($totalClientes); ?></h3>
+Más info <i class="fa fa-arrow-circle-right"></i>
 
-      <p>Clientes</p>
-  
-    </div>
-    
-    <div class="icon">
-    
-      <i class="ion ion-person-add"></i>
-    
-    </div>
-    
-    <a href="clientes" class="small-box-footer">
-
-      Más info <i class="fa fa-arrow-circle-right"></i>
-
-    </a>
-
-  </div>
+</a>
 
 </div>
 
-<div class="col-lg-3 col-xs-6">
+</div>
 
-  <div class="small-box bg-red">
-  
-    <div class="inner">
-    
-      <h3><?php echo number_format($totalProductos); ?></h3>
+<div class="col-sm-12 col-lg-3">
 
-      <p>Productos</p>
-    
-    </div>
-    
-    <div class="icon">
-      
-      <i class="ion ion-ios-cart"></i>
-    
-    </div>
-    
-    <a href="productos" class="small-box-footer">
-      
-      Más info <i class="fa fa-arrow-circle-right"></i>
-    
-    </a>
+<div class="small-box bg-yellow">
 
-  </div>
+<div class="inner">
+
+<h3><?php echo $cantidadReparacion; ?></h3>
+
+<p>En Reparacion</p>
 
 </div>
+
+<div class="icon">
+
+<i class="fa fa-cogs"></i>
+
+</div>
+
+<a href="index.php?ruta=servicios&vista=reparacion" class="small-box-footer">
+
+Más info <i class="fa fa-arrow-circle-right"></i>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="col-sm-12 col-lg-3">
+
+<div class="small-box bg-green">
+
+<div class="inner">
+
+<h3><?php echo $cantidadTerminado; ?></h3>
+
+<p>Trabajos Terminados</p>
+
+</div>
+
+<div class="icon">
+
+<i class="fa fa-quote-left"></i>
+
+</div>
+
+<a href="index.php?ruta=servicios&vista=terminado" class="small-box-footer">
+
+Más info <i class="fa fa-arrow-circle-right"></i>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="col-sm-12 col-lg-3">
+
+<div class="small-box bg-maroon">
+
+<div class="inner">
+
+<h3>$  <?php echo $totalPrecio; ?></h3>
+
+<p> <?php echo count($serviciosPendientes); ?> Trabajos terminados en el día</p>
+
+</div>
+
+<div class="icon">
+
+<i class="fa fa-dollar"></i>
+
+</div>
+
+<a href="ventas" class="small-box-footer">
+
+Más info <i class="fa fa-arrow-circle-right"></i>
+
+</a>
+
+</div>
+
+</div>
+    
+     
+
+   
+
