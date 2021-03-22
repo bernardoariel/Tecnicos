@@ -19,7 +19,7 @@ PRODUCTOS MÁS VENDIDOS
 ======================================-->
 <div class="col-md-4">
 
-<div class="box box-default">
+<div class="box box-success">
 
   <div class="box-header with-border">
 

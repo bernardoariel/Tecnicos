@@ -13,7 +13,7 @@
 
             <div class="col-4-md">
 
-                <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat">Nuevo Servicio</a>
+                <a href="#" class="btn btn-sm btn-info btn-flat" data-toggle="modal" data-target="#modalAgregarServicio" id="llamarModal">Nuevo Servicio</a>
 
             </div>
 
@@ -33,6 +33,7 @@
             $forma = 'DESC';
             $limite =5;
             $todosLosServicios = ControladorServicios::ctrMostrarServiciosTodos($item,$valor,$orden, $forma,$limite); 
+            
         ?>
 
         <!-- /.box-header -->
@@ -93,7 +94,7 @@
         <!-- /.box-body -->
         <div class="box-footer clearfix">
 
-            <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Ver todos los servicios</a>
+            <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right" id="btn-inicioServicios">Ver todos los servicios</a>
 
         </div>
     <!-- /.box-footer -->

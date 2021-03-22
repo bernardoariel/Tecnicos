@@ -221,4 +221,29 @@ class ControladorServicios{
 
        return $respuesta;
  }
+ /*=============================================
+  MOSTRAR TODOS LOS SERVICIOS
+ =============================================*/
+
+ static public function ctrMostrarServiciosTodosPeriodo($item,$valor,$orden, $forma,$limite,$fechaInicio,$fechaFinal) {
+
+       $tabla = "servicios";
+
+       $respuesta = ModeloServicios::mdlMostrarServiciosTodosPeriodo($tabla, $item,$valor, $orden, $forma,$limite,$fechaInicio,$fechaFinal);
+
+       return $respuesta;
+ }
+ /*=============================================
+  MOSTRAR TODOS LOS SERVICIOS
+ =============================================*/
+
+ static public function ctrMostrarUltimosServicios($item,$valor) {
+
+       $tabla = "servicios";
+
+       $respuesta = ModeloServicios::mdlMostrarUltimosServicios($tabla,$item,$valor);
+
+       return $respuesta;
+ }
+
 }

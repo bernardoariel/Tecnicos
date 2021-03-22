@@ -62,6 +62,8 @@ $('select.select2').on('select2:closing', function (e) {
        });    
 
 });
+
+ 
 // $(".textoNumero").numeric();
 /*=============================================
 =HACER UN FOCO EN EL PRIMER INPUT nuevoCliente=
@@ -104,14 +106,15 @@ $("#selectCliente").change(function(){
 	$("#selectCliente .select2-selection__rendered").show();
 	//alert($(this).val());
 	var idVerClienteEditar = $(this).val();
-	if(idVerClienteEditar==1){
+	console.log('idVerClienteEditar: ', idVerClienteEditar);
+	if(idVerClienteEditar==1||idVerClienteEditar=="OCACIONAL"){
 
 		$("#servicioCliente").val("INGRESE EL NOMBRE");
 		$("#servicioTelefono").val("0000000000");
 		$("#servicioCliente").focus();
     $("#servicioCliente").select();
-
-
+    $("#idCLienteServicio").val("0");
+    idVerClienteEditar=1;
 
 	}else{
 		// LOS CARGO EN EL FORMDATA DE UN AJAX
@@ -148,7 +151,7 @@ $("#selectCliente2").change(function(){
 	$("#selectCliente2 .select2-selection__rendered").show();
 	//alert($(this).val());
 	var idVerClienteEditar = $(this).val();
-	console.log("idVerClienteEditar", idVerClienteEditar);
+
 	if(idVerClienteEditar==1){
 
 		$("#servicioCliente").val("INGRESE EL NOMBRE");
@@ -204,8 +207,8 @@ $("#btnCrearServicio").on("click", function(){
 	var servicioProblema = $("#servicioProblema").val(); 
 	var servicioProductoInfo = $("#servicioProductoInfo").val(); 
 	var servicioIdUsuario = $("#servicioIdUsuario").val(); 
-  var servicioPresupuesto =$("#servicioPresupuesto").val();
-  	
+  var servicioPresupuesto = $("#servicioPresupuesto").val();
+  var idCLienteServicio =	$("#idCLienteServicio").val();
 	console.log("servicioCliente", servicioCliente);
   console.log("servicioTelefono", servicioTelefono);
 	console.log("servicioProducto", servicioProducto);
@@ -222,62 +225,63 @@ $("#btnCrearServicio").on("click", function(){
 	datos.append("servicioProductoInfo", servicioProductoInfo);
 	datos.append("servicioIdUsuario", servicioIdUsuario);
   datos.append("servicioPresupuesto", servicioPresupuesto);
+  datos.append("idCLienteServicio", idCLienteServicio);
 
 	$.ajax({
-              url:"ajax/servicios.ajax.php",
-              method: "POST",
-              data: datos,
-              cache: false,
-              contentType: false,
-              processData: false,
-              success:function(respuesta){
-                     console.log("respuesta", respuesta);
-                     let subrespuesta = respuesta.substr(0, 7);
+      url:"ajax/servicios.ajax.php",
+      method: "POST",
+      data: datos,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success:function(respuesta){
+          console.log("respuesta", respuesta);
+          let subrespuesta = respuesta.substr(0, 7);
 
-      switch (subrespuesta){
-          //SI SE HA AGREGADO
-          case "ok":
-            swal({
-            type: "success",
-            title: "El Servicio ha sido AGREGADO correctamente",
-            showConfirmButton: true,
-            confirmButtonText: "Cerrar",
-            focusConfirm:true
-            }).then(function(result){
-              if (result.value) {
-                window.location = "index.php?ruta=servicios&orden=fechacreacion&vista=pendiente";
-              }
-            })
-            break;
-          //SI TIENE CARACTERES NO VALIDOS
-          case "charset":
-            let posrespuesta = respuesta.substr(7, 15);
-            swal({
-              type: "error",
-              title: "¡El Servicio no puede llevar caracteres especiales como "+posrespuesta,
-              showConfirmButton: true,
-              confirmButtonText: "Cerrar",
-              focusConfirm:true
-              }).then(function(result){
-              if (result.value) {
-                window.location = "index.php?ruta=servicios&vista=pendiente";
-              }
-            })
-            break;
-          default:
-            swal({
-              type: "error",
-              title: "Error ",
-              showConfirmButton: true,
-              confirmButtonText: "Cerrar",
-              focusConfirm:true
-              }).then(function(result){
-                if (result.value) {
-                  // window.location = "clientes";
-                }
-              })
-              break;
-        }//switch  
+          switch (subrespuesta){
+              //SI SE HA AGREGADO
+              case "ok":
+                swal({
+                type: "success",
+                title: "El Servicio ha sido AGREGADO correctamente",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                focusConfirm:true
+                }).then(function(result){
+                  if (result.value) {
+                    window.location = "index.php?ruta=servicios&orden=fechacreacion&vista=pendiente";
+                  }
+                })
+                break;
+              //SI TIENE CARACTERES NO VALIDOS
+              case "charset":
+                let posrespuesta = respuesta.substr(7, 15);
+                swal({
+                  type: "error",
+                  title: "¡El Servicio no puede llevar caracteres especiales como "+posrespuesta,
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  focusConfirm:true
+                  }).then(function(result){
+                  if (result.value) {
+                    window.location = "index.php?ruta=servicios&vista=pendiente";
+                  }
+                })
+                break;
+              default:
+                swal({
+                  type: "error",
+                  title: "Error ",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  focusConfirm:true
+                  }).then(function(result){
+                    if (result.value) {
+                      // window.location = "clientes";
+                    }
+                  })
+                  break;
+            }//switch  
       }//SUCCESS
   })//INICIO AJAX
 
@@ -319,7 +323,7 @@ $(".tablaServicios tbody").on("click", "button.btnEliminarServicio", function(){
                   if (result.value) {
                     var datos = new FormData();
                     datos.append("idServicioEliminar", idServicioEliminar);
-                  
+                    datos.append("nombreServicioProducto", respuesta["producto"]);
 
                     $.ajax({
                         url:"ajax/servicios.ajax.php",

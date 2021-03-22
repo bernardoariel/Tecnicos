@@ -9,7 +9,7 @@ class ModeloServicios{
 	=============================================*/
 
 	static public function mdlMostrarServiciosTodos($tabla, $item, $valor, $orden, $forma,$limite){
-
+     
 		if($item != null){
 
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
@@ -21,10 +21,10 @@ class ModeloServicios{
 			return $stmt -> fetch();
 
 		}else{
-
+        
 			if($orden == null){
-
-				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+            
+				$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla limit $limite");
 
 				$stmt -> execute();
 
@@ -34,7 +34,7 @@ class ModeloServicios{
 
             if($limite == null){
 
-               $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla order by $orden $forma");
+               $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla order by $orden $forma ");
 
                $stmt -> execute();
 
@@ -270,18 +270,48 @@ class ModeloServicios{
   $stmt = null;
  }
 
- static public function mdlMostrarServiciosDelDia($tabla,$estado,$fecha){
-    $fechaInicio = $fecha." 00:00:00";
-    $fechaFinal = $fecha." 23:59:59";
-    // echo "SELECT DATE_FORMAT(fecha,'%Y-%m-%d')mFecha ,estado,precio  FROM $tabla WHERE estado = $estado and fecha ='$fecha'";
-    // echo "SELECT * FROM $tabla WHERE estado = $estado and fecha BETWEEN '$fechaInicio' AND '$fechaFinal' ";
-    $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE estado = $estado and fecha BETWEEN '$fechaInicio' AND '$fechaFinal' ");
+   static public function mdlMostrarServiciosDelDia($tabla,$estado,$fecha){
 
-    // $stmt->bindParam(":estado", $estado, PDO::PARAM_INT);
-    // $stmt->bindParam(":fecha", $fecha, PDO::PARAM_STR);
+      $fechaInicio = $fecha." 00:00:00";
+      $fechaFinal = $fecha." 23:59:59";
+      
+      $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE estado = $estado and fecha BETWEEN '$fechaInicio' AND '$fechaFinal' ");
 
-    $stmt->execute();
+      // $stmt->bindParam(":estado", $estado, PDO::PARAM_INT);
+      // $stmt->bindParam(":fecha", $fecha, PDO::PARAM_STR);
+
+      $stmt->execute();
+
+      return $stmt->fetchAll();
+   }
+
+   static public function mdlModificarVentas($item,$valor,$modo){
+
+      $stmt = Conexion::conectar()->prepare("update productos set ventas=ventas$modo where $item=:valor; ");
+      
+      $stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
+
+      if ($stmt->execute()){
+         
+         return "ok";
+
+      }else{
+
+         return $stmt->errorInfo();	
+      
+      }
+      
+   }
+
+   static public function mdlMostrarUltimosServicios($tabla,$item,$valor){
+
  
-    return $stmt->fetchAll();
- }
+      $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha >= :fecha");
+
+      $stmt->bindParam(":fecha", $valor, PDO::PARAM_STR);
+
+      $stmt->execute();
+
+      return $stmt->fetchAll();
+   }
 }

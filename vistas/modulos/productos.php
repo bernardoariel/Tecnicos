@@ -24,7 +24,7 @@
 
             <div class="box-header with-border">
 
-                <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#modalAgregarProducto">
+                <button class="btn bg-orange btn-flat" data-toggle="modal" data-target="#modalAgregarProducto">
 
                     Agregar producto
 
@@ -153,7 +153,7 @@
         CABEZA DEL MODAL
         ======================================-->
 
-                <div class="modal-header" style="background:#3c8dbc; color:white">
+                <div class="modal-header" style="background:#FF851B; color:white">
 
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
@@ -198,7 +198,7 @@
                     <button type="button" class="btn btn-default pull-left btn-flat" data-dismiss="modal">Salir</button>
 
                     <!-- <button type="submit" class="btn btn-primary">Guardar cliente</button> -->
-                    <button type="button" id="btnCrearProducto" class="btn btn-primary pull-right btn-flat">Guardar Producto</button>
+                    <button type="button" id="btnCrearProducto" class="btn bg-orange pull-right btn-flat">Guardar Producto</button>
 
                 </div>
 

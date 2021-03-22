@@ -1,6 +1,8 @@
 <?php
 require_once "../controladores/servicios.controlador.php";
 require_once "../modelos/servicios.modelo.php";
+require_once "../controladores/clientes.controlador.php";
+require_once "../modelos/clientes.modelo.php";
 
 class AjaxServicios{
 
@@ -32,17 +34,31 @@ class AjaxServicios{
       public $servicioProductoInfo;
       public $servicioIdUsuario;
       public $servicioPresupuesto;
+      public $idCLienteServicio;
       public function ajaxNuevoServicio() {
 
             if(is_null($this->servicioPresupuesto)){
 
-            $presupuesto = 0;
+                  $presupuesto = 0;
 
             } else{
 
-            $presupuesto = $this->servicioPresupuesto;
+                  $presupuesto = $this->servicioPresupuesto;
             
             }    
+
+            if($this->idCLienteServicio == 0){
+
+              /*=============================================
+              Mostramos ClienteNuevo STATIC
+              =============================================*/
+              $datos = array(
+                  "cliente" => strtoupper($this->servicioCliente),
+                  "telefono" => $this->servicioTelefono);
+
+              $clienteNuevo = ControladorClientes::ctrNuevoClienteServicios($datos);    
+
+            }   
 
             $datos = array(
                   "cliente" => strtoupper($this->servicioCliente),
@@ -56,6 +72,14 @@ class AjaxServicios{
 
             $respuesta = ControladorServicios::ctrNuevoServicio($datos);
 
+            /*=============================================
+              SUMAMOS UNA VENTA
+            =============================================*/
+            $item = "nombre";
+            $valor = $this->servicioProducto;
+            $modo = "+1";
+            $servicios = ModeloServicios::mdlModificarVentas($item,$valor,$modo);
+
             echo $respuesta;
 
       }
@@ -64,7 +88,7 @@ class AjaxServicios{
       ELIMINAR SERVICIO
       =============================================*/
       public $idServicioEliminar;
-
+      public $nombreServicioProducto;
       public function ajaxEliminarServicio(){
 
             $item = "id";
@@ -72,7 +96,17 @@ class AjaxServicios{
 
             $respuesta = ControladorServicios::ctrEliminarServicio($item, $valor);
 
+             /*=============================================
+              SUMAMOS UNA VENTA
+            =============================================*/
+            $item = "nombre";
+            $valor = $this->nombreServicioProducto;
+            $modo = "-1";
+            $servicios = ModeloServicios::mdlModificarVentas($item,$valor,$modo);
+
             echo $respuesta;
+
+
       }
 
       /*=============================================
@@ -159,10 +193,10 @@ VER SERVICIO
 =============================================*/
 if (isset($_POST["idVerServicioEditar"])) {
 
- $verServicio = new AjaxServicios();
- $verServicio->idVerServicioEditar = $_POST["idVerServicioEditar"];
- $verServicio->idSercicioEstado = $_POST["idSercicioEstado"];
- $verServicio->ajaxVerServicio();
+      $verServicio = new AjaxServicios();
+      $verServicio->idVerServicioEditar = $_POST["idVerServicioEditar"];
+      $verServicio->idSercicioEstado = $_POST["idSercicioEstado"];
+      $verServicio->ajaxVerServicio();
 }
 /*=============================================
 AGREGAR SERVICIO
@@ -170,16 +204,16 @@ AGREGAR SERVICIO
 
 if (isset($_POST["servicioCliente"])) {
 
-       $crearServicio = new AjaxServicios();
-       $crearServicio->servicioCliente = $_POST["servicioCliente"];
-       $crearServicio->servicioTelefono = $_POST["servicioTelefono"];
-       $crearServicio->servicioProducto = $_POST["servicioProducto"];
-       $crearServicio->servicioProblema = $_POST["servicioProblema"];
-       $crearServicio->servicioProductoInfo = $_POST["servicioProductoInfo"];
-       $crearServicio->servicioIdUsuario = $_POST["servicioIdUsuario"];
-       $crearServicio->servicioPresupuesto = $_POST["servicioPresupuesto"];
-
-       $crearServicio->ajaxNuevoServicio();
+      $crearServicio = new AjaxServicios();
+      $crearServicio->servicioCliente = $_POST["servicioCliente"];
+      $crearServicio->servicioTelefono = $_POST["servicioTelefono"];
+      $crearServicio->servicioProducto = $_POST["servicioProducto"];
+      $crearServicio->servicioProblema = $_POST["servicioProblema"];
+      $crearServicio->servicioProductoInfo = $_POST["servicioProductoInfo"];
+      $crearServicio->servicioIdUsuario = $_POST["servicioIdUsuario"];
+      $crearServicio->servicioPresupuesto = $_POST["servicioPresupuesto"];
+      $crearServicio->idCLienteServicio = $_POST["idCLienteServicio"];      
+      $crearServicio->ajaxNuevoServicio();
 }
 
 /*=============================================
@@ -188,9 +222,10 @@ ELIMINAR PRODUCTO
 
 if (isset($_POST["idServicioEliminar"])) {
 
- $eliminarServicio = new AjaxServicios();
- $eliminarServicio->idServicioEliminar = $_POST["idServicioEliminar"];
- $eliminarServicio->ajaxEliminarServicio();
+      $eliminarServicio = new AjaxServicios();
+      $eliminarServicio->idServicioEliminar = $_POST["idServicioEliminar"];
+      $eliminarServicio->nombreServicioProducto = $_POST["nombreServicioProducto"];
+      $eliminarServicio->ajaxEliminarServicio();
 }
 /*=============================================
 EDITAR SERVICIO
@@ -198,14 +233,16 @@ EDITAR SERVICIO
 
 if (isset($_POST["idServicio"])) {
 
- $editarServicio = new AjaxServicios();
- $editarServicio->idServicio = $_POST["idServicio"];
- $editarServicio->editarServicioTelefono = $_POST["editarServicioTelefono"];
- $editarServicio->servicioProductoEditar = $_POST["servicioProductoEditar"];
- $editarServicio->editarServicioProblema = $_POST["editarServicioProblema"];
- $editarServicio->editarServicioInfoProducto = $_POST["editarServicioInfoProducto"];
-$editarServicio->servicioPresupuestoEditar = $_POST["servicioPresupuestoEditar"];
- $editarServicio->ajaxEditarServicio();
+      $editarServicio = new AjaxServicios();
+      $editarServicio->idServicio = $_POST["idServicio"];
+      $editarServicio->editarServicioTelefono = $_POST["editarServicioTelefono"];
+      $editarServicio->servicioProductoEditar = $_POST["servicioProductoEditar"];
+      $editarServicio->editarServicioProblema = $_POST["editarServicioProblema"];
+      $editarServicio->editarServicioInfoProducto = $_POST["editarServicioInfoProducto"];
+      $editarServicio->servicioPresupuestoEditar = $_POST["servicioPresupuestoEditar"];
+      $editarServicio->servicioPresupuestoEditar = $_POST["idCLienteServicio"];
+      
+      $editarServicio->ajaxEditarServicio();
 }
 /*=============================================
 ELIMINAR PRODUCTO
@@ -213,11 +250,11 @@ ELIMINAR PRODUCTO
 
 if (isset($_POST["idServicioCambiarEstado"])) {
 
- $repararServicio = new AjaxServicios();
- $repararServicio->idServicioCambiarEstado = $_POST["idServicioCambiarEstado"];
- $repararServicio->idServicioUsuarioReparar = $_POST["idServicioUsuarioReparar"];
- $repararServicio->idServicioEstado = $_POST["idServicioEstado"];
- $repararServicio->ajaxCambiarEstadoServicio();
+      $repararServicio = new AjaxServicios();
+      $repararServicio->idServicioCambiarEstado = $_POST["idServicioCambiarEstado"];
+      $repararServicio->idServicioUsuarioReparar = $_POST["idServicioUsuarioReparar"];
+      $repararServicio->idServicioEstado = $_POST["idServicioEstado"];
+      $repararServicio->ajaxCambiarEstadoServicio();
 }
 /*=============================================
 MODIFICAR SERVICIO TERMINAR - EDITAR ESTADO 2 / 3
@@ -225,11 +262,11 @@ MODIFICAR SERVICIO TERMINAR - EDITAR ESTADO 2 / 3
 
 if (isset($_POST["idServicioTerminar"])) {
 
- $modificarServicio = new AjaxServicios();
- $modificarServicio->idServicioTerminar = $_POST["idServicioTerminar"];
- $modificarServicio->servicioPrecioTerminar = $_POST["servicioPrecioTerminar"];
- $modificarServicio->servicioProductoInfoTerminar = $_POST["servicioProductoInfoTerminar"];
- $modificarServicio->estadoTerminar = $_POST["estadoTerminar"];
+      $modificarServicio = new AjaxServicios();
+      $modificarServicio->idServicioTerminar = $_POST["idServicioTerminar"];
+      $modificarServicio->servicioPrecioTerminar = $_POST["servicioPrecioTerminar"];
+      $modificarServicio->servicioProductoInfoTerminar = $_POST["servicioProductoInfoTerminar"];
+      $modificarServicio->estadoTerminar = $_POST["estadoTerminar"];
 
- $modificarServicio->ajaxModificarServicio();
+      $modificarServicio->ajaxModificarServicio();
 }

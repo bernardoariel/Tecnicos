@@ -154,6 +154,54 @@ class ControladorClientes{
 		}		
 
 	}
+	/*=============================================
+	CREAR CLIENTES
+	=============================================*/
+
+	static public function ctrNuevoClienteServicios($datos){
+
+		if(!empty($datos)){//controlo si viene cargado con datos
+			//valido la entrada
+			$item = "nombre";
+			$valor = "CARACTERES_ESPECIALES";
+			// CONSULTO LOS CARACTERES ESPECIALES EN LA BD
+			$caracteresESPECIALES = ModeloClientes::mdlMostrarCaracteresEspeciales("parametros",$item, $valor);
+			// CONSULTO LOS CARACTERES ESPECIALES EN LA BD
+			$CARACTERES = $caracteresESPECIALES["valor"];
+
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ '.$CARACTERES.']+$/', $datos["cliente"])){
+
+			   	$tabla = "clientes";
+
+			   	$datos = array("nombre"=>strtoupper($datos["cliente"]),
+					           "direccion"=>".",
+					           "telefono"=>$datos["telefono"],
+					           "obs"=>".");
+			    
+			    $respuesta = ModeloClientes::mdlNuevoCliente($tabla, $datos);
+			  	//doy la respuesta ok/error
+			    return $respuesta;
+
+			}else{
+
+				$nombre = $datos["nombre"];
+				
+				for ($i=0; $i < strlen($nombre) ; $i++) { 
+					# code...
+					if(!preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ '.$CARACTERES.']+$/', $nombre[$i])){
+
+						//error de validacion preg_match
+						return "charset NOMBRE: ".$nombre[$i];
+					}
+
+				}
+			
+			}
+
+		}
+
+	}
+	
 	
 }
 

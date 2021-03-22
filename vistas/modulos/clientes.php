@@ -24,7 +24,7 @@
 
       <div class="box-header with-border">
 
-        <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#modalAgregarCliente">
+        <button class="btn bg-olive btn-flat" data-toggle="modal" data-target="#modalAgregarCliente">
           
           Agregar cliente
 
@@ -173,7 +173,7 @@
         CABEZA DEL MODAL
         ======================================-->
 
-        <div class="modal-header" style="background:#3c8dbc; color:white">
+        <div class="modal-header" style="background:#3D9970; color:white">
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
