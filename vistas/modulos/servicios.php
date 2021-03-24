@@ -1,16 +1,48 @@
+
 <?php include('ajax/modal.cliente.ajax.php'); ?>
 <?php
 
   if (isset($_GET["vista"])){
 
     $vista = $_GET["vista"];
+    $vista1= $_GET["vista"];
+
+    switch ($vista) {
+      case 'pendientes':
+
+        $vista2 = "reparacion";
+        $vista3 = "terminado";
+        echo '<style>.nav-tabs-custom > .nav-tabs > li.active {
+          border-top-color: #1266F1;}</style>';
+        break;
+
+      case 'reparacion':
+
+        $vista2 = 'pendientes';
+        $vista3 = "terminado";
+        echo '<style>.nav-tabs-custom > .nav-tabs > li.active {
+          border-top-color: #FFA900;}</style>';
+        break;
+
+      case 'terminado':
+
+        $vista2 = 'pendientes';
+        $vista3 = 'reparacion';
+        echo '<style>.nav-tabs-custom > .nav-tabs > li.active {
+          border-top-color: #00B74A;}</style>';
+        break;
+
+    }
 
   }else{
 
-    $vista = "pendiente";
+    $vista = "pendientes";
+    $vista1 = "pendientes";
+    $vista2 = "reparacion";
+    $vista3 = "terminado";
 
   }
-  
+
 ?>
 <div class="content-wrapper">
 
@@ -45,9 +77,9 @@
           <div class="nav-tabs-custom">
             <!-- Tabs within a box -->
             <ul class="nav nav-tabs pull-right">
-              <li class="active"><a href="#pendientes" data-toggle="tab">Pendientes</a></li>
-              <li><a href="#reparando" data-toggle="tab">En Reparacion</a></li>
-              <li><a href="#terminado" data-toggle="tab">Terminado</a></li>
+              <li class="active" id="li<?php echo $vista1; ?>"><a href="#<?php echo $vista1; ?>"  data-toggle="tab"><?php echo $vista1; ?></a></li>
+              <li id="li<?php echo $vista2; ?>"><a href="#<?php echo $vista2; ?>" data-toggle="tab"><?php echo $vista2; ?></a></li>
+              <li id="li<?php echo $vista3; ?>"><a href="#<?php echo $vista3; ?>" data-toggle="tab"><?php echo $vista3; ?></a></li>
               <button class="btn btn-danger pull-left btn-flat" data-toggle="modal" data-target="#modalAgregarServicio">
                 Agregar servicios
               </button>
@@ -57,19 +89,19 @@
             
             <div class="tab-content ">
               <!-- Morris chart - Sales -->
-              <div class="chart tab-pane active" id="pendientes" style="position: relative;">
+              <div class="chart tab-pane active" id="<?php echo $vista1; ?>" style="position: relative;">
                 <?php
-                include("servicios/pendientes.php");
+                include("servicios/".$vista1.".php");
                 ?>
               </div>
-              <div class="chart tab-pane" id="reparando" style="position: relative;">
+              <div class="chart tab-pane" id="<?php echo $vista2; ?>" style="position: relative;">
                 <?php
-                include("servicios/enservicio.php");
+                include("servicios/".$vista2.".php");
                 ?>
               </div>
-              <div class="chart tab-pane" id="terminado" style="position: relative;">
+              <div class="chart tab-pane" id="<?php echo $vista3; ?>" style="position: relative;">
                 <?php
-                include("servicios/terminado.php");
+                include("servicios/".$vista3.".php");
                 ?>
               </div>
             </div>

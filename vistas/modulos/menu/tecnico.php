@@ -42,7 +42,7 @@
     
         <li>
         
-            <a href="index.php?ruta=servicios&vista=pendiente">
+            <a href="index.php?ruta=servicios&vista=pendientes">
             
                 <i class="fa fa-star"></i>
                 <span>Pendientes</span>

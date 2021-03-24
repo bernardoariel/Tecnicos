@@ -895,3 +895,28 @@ $(".tablaServicios tbody").on("click", "button.btnEntregado", function () {
     }, //sucess
   }); //ajax
 })
+
+$("#literminado").on("click", ()=>{
+ 
+  $("#literminado").css({"border-top-color":"#00B74A"});
+  $("#lipendientes").css({"border-top-color":"#FFF"});
+  $("#lireparacion").css({"border-top-color":"#FFF"});
+
+});
+
+$("#lipendientes").on("click", ()=>{
+
+  $("#lipendientes").css({"border-top-color":"#1266F1"});
+  
+  $("#literminado").css({"border-top-color":"#FFF"});
+  $("#lireparacion").css({"border-top-color":"#FFF"});
+
+})
+
+$("#lireparacion").on("click", ()=>{
+
+  $("#lireparacion").css({"border-top-color":"#FFA900"});
+  $("#lipendientes").css({"border-top-color":"#FFF"});
+  $("#literminado").css({"border-top-color":"#FFF"});
+
+})

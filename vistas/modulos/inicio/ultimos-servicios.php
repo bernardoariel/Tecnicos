@@ -94,7 +94,7 @@
         <!-- /.box-body -->
         <div class="box-footer clearfix">
 
-            <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right" id="btn-inicioServicios">Ver todos los servicios</a>
+            <a href="todos-los-servicios" class="btn btn-sm btn-default btn-flat pull-right" id="btn-inicioServicios">Ver todos los servicios</a>
 
         </div>
     <!-- /.box-footer -->

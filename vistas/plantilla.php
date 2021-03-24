@@ -183,7 +183,7 @@ CUERPO DOCUMENTO
         $_GET["ruta"] == "entregados" ||
         $_GET["ruta"] == "ventas-repuestos" ||
         $_GET["ruta"] == "ventas-cobradas" ||
-        $_GET["ruta"] == "etiquetas" ||
+        $_GET["ruta"] == "todos-los-servicios" ||
         $_GET["ruta"] == "imprimiretiqueta" ||
         $_GET["ruta"] == "editar-perfil" ||
         $_GET["ruta"] == "reportes" ||
