@@ -74,6 +74,7 @@ class AjaxClientes{
     $valor = $this->nuevoCliente;
     $orden = null;
     $forma = "ASC";
+
     //CONSULTO SI EXISTE ALGUN CLIENTE
     $clientes = ControladorClientes::ctrMostrarClientes($item, $valor,$orden,$forma);
 
@@ -85,8 +86,6 @@ class AjaxClientes{
                	   "obs"=>strtoupper($this->nuevoObs));
 
 	  	$respuesta = ControladorClientes::ctrNuevoCliente($datos);
-     
-      
 
 	    echo $respuesta;
 	    

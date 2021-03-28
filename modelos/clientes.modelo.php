@@ -75,32 +75,63 @@ class ModeloClientes{
 	CREAR CLIENTE
 	=============================================*/
 
-	static public function mdlNuevoCliente($tabla, $datos){
+	static public function mdlNuevoClienteServicios($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO `clientes`(`nombre`, `direccion`, `telefono`, `obs`) VALUES
-					 (:nombre,:direccion,:telefono,:obs)");
+		// $pdo = new PDO("mysql:host=localhost;dbname=tecnico", "root", "");
+		
+		 $insertSql = "INSERT INTO `clientes`(`nombre`, `direccion`, `telefono`, `obs`) VALUES(:nombre,:direccion,:telefono,:obs)";
+		 $consultar =  Conexion::conectar();
+		// $stmt = $pdo->prepare($insertSql);
+	    $stmt = $consultar->prepare($insertSql);
+		
 
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
 		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
 		$stmt->bindParam(":obs", $datos["obs"], PDO::PARAM_STR);
-
+		$stmt->execute();
 			   
-		if($stmt->execute()){
+		// if($stmt->execute()){
+
+		// 	return Conexion::conectar()->lastInsertId();
+
+		// }else{
+
+		// 	return "error";
+		
+		// }
+
+		// $stmt->close();
+		// $stmt = null;
+		return $consultar->lastInsertId();
+//Imprima el resultado con fines de ejemplo.
+// echo 'El id de la última fila insertada fue: ' . $id;
+
+	}
+	/*=============================================
+	CREAR CLIENTE
+	=============================================*/
+
+	static public function mdlNuevoCliente($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO `clientes`(`nombre`, `direccion`, `telefono`, `obs`) VALUES(:nombre,:direccion,:telefono,:obs)");
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
+		$stmt->bindParam(":obs", $datos["obs"], PDO::PARAM_STR);
+		$stmt->execute();
+
+		if ($stmt->execute()){
 
 			return "ok";
 
 		}else{
 
-			return "error";
-		
+			return $stmt->errorInfo();	
+
 		}
-
-		$stmt->close();
-		$stmt = null;
-
+	
 	}
-
 	
 
 	/*=============================================

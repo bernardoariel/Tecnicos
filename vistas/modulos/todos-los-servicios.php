@@ -24,19 +24,19 @@
 
       <div class="box-body">
         
-      <table class="table table-bordered table-striped dt-responsive tablaServicios" width="100%">
+      <table class="table table-bordered table-striped dt-responsive tablaServiciosTodos" width="100%">
 
 <thead>
 
  <tr>
 
   <th style="width: 15px;background-color:#F93154;color:aliceblue;">#</th>
-  <th style="width: 90px;background-color:#F93154;color:aliceblue;">Fecha Ingreso</th>
-  <th style="width: 200px;background-color:#F93154;color:aliceblue;">Nombre</th>
-  <th style="width: 100px;background-color:#F93154;color:aliceblue;">Telefono</th>
-  <th style="width: 100px;background-color:#F93154;color:aliceblue;">Producto</th>
-  <th style="width: 100px;background-color:#F93154;color:aliceblue;">Estado</th>
-  <th style="width: 50px;background-color:#F93154;color:aliceblue;">Precio</th>
+  <th style="background-color:#F93154;color:aliceblue;">Fecha Ingreso</th>
+  <th style="background-color:#F93154;color:aliceblue;">Nombre</th>
+  <th style="background-color:#F93154;color:aliceblue;">Telefono</th>
+  <th style="background-color:#F93154;color:aliceblue;">Producto</th>
+  <th style="background-color:#F93154;color:aliceblue;">Estado</th>
+  <th style="background-color:#F93154;color:aliceblue;">Precio</th>
   <th style="background-color:#F93154;color:aliceblue;">Acciones</th>
 
  </tr>
@@ -145,8 +145,8 @@
 
                    <td>';
 
-                echo '<div class="btn-group">
-                  <button class="btn btn-default btn-flat btnVerCliente" data-toggle="modal" data-target="#modalVerCliente" cliente="' . $value["cliente"] .'" title="ver Cliente"><i class = "fa fa-user"></i></button>         
+                echo '<div class="btn-group text-center">
+                  <button class="btn btn-default btn-flat btnVerClienteTServicios" data-toggle="modal" data-target="#modalVerCliente" idClienteTServicios="' . $value["id_cliente"] .'" title="ver Cliente"><i class = "fa fa-user"></i></button>         
                
                 
                  

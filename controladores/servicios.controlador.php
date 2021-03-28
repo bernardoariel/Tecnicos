@@ -105,68 +105,64 @@ class ControladorServicios{
  /*=============================================
 	EDITAR SERVICIO
 =============================================*/
- static public function ctrEditarServicio($datos)
- {
+ static public function ctrEditarServicio($datos){
 
-  if (!empty($datos)) { //controlo si viene cargado con datos
+       if(!empty($datos)){ //controlo si viene cargado con datos
 
-   //valido la entrada
-   $item = "nombre";
-   $valor = "CARACTERES_ESPECIALES";
-   // CONSULTO LOS CARACTERES ESPECIALES EN LA BD
-   $caracteresESPECIALES = ModeloServicios::mdlMostrarCaracteresEspeciales("parametros", $item, $valor);
-   // CONSULTO LOS CARACTERES ESPECIALES EN LA BD
-   $CARACTERES = $caracteresESPECIALES["valor"];
+              //valido la entrada
+              $item = "nombre";
+              $valor = "CARACTERES_ESPECIALES";
+              // CONSULTO LOS CARACTERES ESPECIALES EN LA BD
+              $caracteresESPECIALES = ModeloServicios::mdlMostrarCaracteresEspeciales("parametros", $item, $valor);
+              // CONSULTO LOS CARACTERES ESPECIALES EN LA BD
+              $CARACTERES = $caracteresESPECIALES["valor"];
 
-   if (
-    preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ' . $CARACTERES . ']+$/', $datos["producto"]) &&
-    preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ' . $CARACTERES . ']+$/', $datos["producto_info"]) &&
-    preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ' . $CARACTERES . ']+$/', $datos["problema"])
-   ) {
+              if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ' . $CARACTERES . ']+$/', $datos["producto"]) &&
+                     preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ' . $CARACTERES . ']+$/', $datos["producto_info"]) &&
+                     preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ' . $CARACTERES . ']+$/', $datos["problema"])){
 
-    $tabla = "servicios";
+                     $tabla = "servicios";
 
-    $respuesta = ModeloServicios::mdlEditarServicio($tabla, $datos);
+                     $respuesta = ModeloServicios::mdlEditarServicio($tabla, $datos);
 
-    //doy la respuesta ok/error
-    return  $respuesta;
-   } else {
+                     //doy la respuesta ok/error
+                     return  $respuesta;
 
+              }else{
 
-    $producto = $datos["producto"];
-    $producto_info = $datos["producto_info"];
-    $problema = $datos["problema"];
+                     $producto = $datos["producto"];
+                     $producto_info = $datos["producto_info"];
+                     $problema = $datos["problema"];
 
+                     for ($i = 0; $i < strlen($producto); $i++) {
+                     
+                            if (!preg_match('/^[#\.\-a-zA-Z0-9 ' . $CARACTERES . ']+$/', $producto[$i])) {
 
+                                   //error de validacion preg_match
+                                   return "charset PRODUCTO: " . $producto[$i];
+                            }
+                     }
 
-    for ($i = 0; $i < strlen($producto); $i++) {
-     # code...
-     if (!preg_match('/^[#\.\-a-zA-Z0-9 ' . $CARACTERES . ']+$/', $producto[$i])) {
+                     for ($i = 0; $i < strlen($producto_info); $i++) {
+              
+                            if (!preg_match('/^[#\.\-a-zA-Z0-9 ' . $CARACTERES . ']+$/', $producto_info[$i])) {
 
-      //error de validacion preg_match
-      return "charset PRODUCTO: " . $producto[$i];
-     }
-    }
+                                   //error de validacion preg_match
+                                   return "charset OBS del Producto: " . $producto_info[$i];
+                            }
+                     }
 
-    for ($i = 0; $i < strlen($producto_info); $i++) {
-     # code...
-     if (!preg_match('/^[#\.\-a-zA-Z0-9 ' . $CARACTERES . ']+$/', $producto_info[$i])) {
+                     for($i = 0; $i < strlen($problema); $i++){
 
-      //error de validacion preg_match
-      return "charset OBS del Producto: " . $producto_info[$i];
-     }
-    }
+                            if (!preg_match('/^[#\.\-a-zA-Z0-9 ' . $CARACTERES . ']+$/', $problema[$i])) {
 
-    for ($i = 0; $i < strlen($problema); $i++) {
-     # code...
-     if (!preg_match('/^[#\.\-a-zA-Z0-9 ' . $CARACTERES . ']+$/', $problema[$i])) {
+                                   //error de validacion preg_match
+                                   return "charset PROBLE;A: " . $problema[$i];
+                            }
 
-      //error de validacion preg_match
-      return "charset PROBLE;A: " . $problema[$i];
-     }
-    }
-   }
-  }
+                     }
+              }
+       }
  }
  /*=============================================
 	ELIMINAR SERVICIO

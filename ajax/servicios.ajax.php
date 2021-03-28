@@ -3,6 +3,8 @@ require_once "../controladores/servicios.controlador.php";
 require_once "../modelos/servicios.modelo.php";
 require_once "../controladores/clientes.controlador.php";
 require_once "../modelos/clientes.modelo.php";
+require_once "../controladores/productos.controlador.php";
+require_once "../modelos/productos.modelo.php";
 
 class AjaxServicios{
 
@@ -29,7 +31,7 @@ class AjaxServicios{
       =============================================*/
       public $servicioCliente;
       public $servicioTelefono;
-      public $servicioProducto;
+      public $servicioProductoId;
       public $servicioProblema;
       public $servicioProductoInfo;
       public $servicioIdUsuario;
@@ -37,6 +39,9 @@ class AjaxServicios{
       public $idCLienteServicio;
       public function ajaxNuevoServicio() {
 
+            /**
+             * 
+             */
             if(is_null($this->servicioPresupuesto)){
 
                   $presupuesto = 0;
@@ -47,40 +52,69 @@ class AjaxServicios{
             
             }    
 
+            /**
+             * SE VERIFICA SI EXISTE AL CLIENTE
+             */
             if($this->idCLienteServicio == 0){
 
-              /*=============================================
-              Mostramos ClienteNuevo STATIC
-              =============================================*/
-              $datos = array(
+                  /*=============================================
+                  Mostramos ClienteNuevo STATIC
+                  =============================================*/
+                  $datos = array(
                   "cliente" => strtoupper($this->servicioCliente),
                   "telefono" => $this->servicioTelefono);
 
-              $clienteNuevo = ControladorClientes::ctrNuevoClienteServicios($datos);    
+                  $clienteNuevo = ControladorClientes::ctrNuevoClienteServicios($datos);    
+                  
+                  $idCliente = $clienteNuevo;
 
-            }   
+            }else{
 
-            $datos = array(
-                  "cliente" => strtoupper($this->servicioCliente),
-                  "telefono" => $this->servicioTelefono,
-                  "producto" => strtoupper($this->servicioProducto),
-                  "producto_info" => strtoupper($this->servicioProductoInfo),
-                  "problema" => strtoupper($this->servicioProblema),
-                  "id_usuario_creacion" => $this->servicioIdUsuario,
-                  "presupuesto" => $presupuesto           
-            );
+                  $idCliente = $this->idCLienteServicio;
 
-            $respuesta = ControladorServicios::ctrNuevoServicio($datos);
+            }
+            /**
+             * VER EL PRODUCTO
+             */
+            /*=============================================
+                  Mostramos productos STATIC
+            =============================================*/
+            $item = "id";
+            $valor = $this->servicioProductoId;
+            $orden = null;
+            $forma = "ASC";
+         
+            $productos = ControladorProductos::ctrMostrarProductos($item,$valor, $orden,$forma);
 
             /*=============================================
               SUMAMOS UNA VENTA
             =============================================*/
-            $item = "nombre";
-            $valor = $this->servicioProducto;
+            $item = "id";
+            $valor = $this->servicioProductoId;
             $modo = "+1";
             $servicios = ModeloServicios::mdlModificarVentas($item,$valor,$modo);
 
-            echo $respuesta;
+            if($servicios=="ok"){
+                
+                  $datos = array(
+                        "id_cliente"=>$idCliente,
+                        "cliente" => strtoupper($this->servicioCliente),
+                        "telefono" => $this->servicioTelefono,
+                        "id_producto" =>$this->servicioProductoId,
+                        "producto" =>  $productos["nombre"],
+                        "producto_info" => strtoupper($this->servicioProductoInfo),
+                        "problema" => strtoupper($this->servicioProblema),
+                        "id_usuario_creacion" => $this->servicioIdUsuario,
+                        "presupuesto" => $presupuesto           
+                  );
+      
+                  $respuesta = ControladorServicios::ctrNuevoServicio($datos);
+
+                  echo $respuesta;
+
+            }
+
+            
 
       }
 
@@ -115,26 +149,39 @@ class AjaxServicios{
       public $idServicio;
 
       public $editarServicioTelefono;
-      public $servicioProductoEditar;
-      public $editarServicioProblema;
+      public $servicioProductoEditarId;
+      public $editarServicioProblemaId;
       public $editarServicioInfoProducto;
       public $servicioPresupuestoEditar;
       public function ajaxEditarServicio(){
 
             if (is_null($this->servicioPresupuestoEditar)){
 
-            $presupuesto = 0;
+                  $presupuesto = 0;
 
             } else {
 
-            $presupuesto = $this->servicioPresupuestoEditar;
+                  $presupuesto = $this->servicioPresupuestoEditar;
 
             }    
-
+            /**
+             * VER EL PRODUCTO
+             */
+            /*=============================================
+                  Mostramos productos STATIC
+            =============================================*/
+            $item = "id";
+            $valor = $this->servicioProductoEditarId;
+            $orden = null;
+            $forma = "ASC";
+ 
+            $productos = ControladorProductos::ctrMostrarProductos($item,$valor, $orden,$forma);
+            
             $datos = array(
                   "id" => $this->idServicio,
                   "telefono" => strtoupper($this->editarServicioTelefono),
-                  "producto" => strtoupper($this->servicioProductoEditar),
+                  "id_producto" => $this->servicioProductoEditarId,
+                  "producto" => strtoupper($productos["nombre"]),
                   "problema" => strtoupper($this->editarServicioInfoProducto),
                   "producto_info" => strtoupper($this->editarServicioProblema),
                   "presupuesto" => $presupuesto
@@ -207,7 +254,7 @@ if (isset($_POST["servicioCliente"])) {
       $crearServicio = new AjaxServicios();
       $crearServicio->servicioCliente = $_POST["servicioCliente"];
       $crearServicio->servicioTelefono = $_POST["servicioTelefono"];
-      $crearServicio->servicioProducto = $_POST["servicioProducto"];
+      $crearServicio->servicioProductoId = $_POST["servicioProductoId"];
       $crearServicio->servicioProblema = $_POST["servicioProblema"];
       $crearServicio->servicioProductoInfo = $_POST["servicioProductoInfo"];
       $crearServicio->servicioIdUsuario = $_POST["servicioIdUsuario"];
@@ -236,11 +283,11 @@ if (isset($_POST["idServicio"])) {
       $editarServicio = new AjaxServicios();
       $editarServicio->idServicio = $_POST["idServicio"];
       $editarServicio->editarServicioTelefono = $_POST["editarServicioTelefono"];
-      $editarServicio->servicioProductoEditar = $_POST["servicioProductoEditar"];
+      $editarServicio->servicioProductoEditarId = $_POST["servicioProductoEditarId"];
       $editarServicio->editarServicioProblema = $_POST["editarServicioProblema"];
       $editarServicio->editarServicioInfoProducto = $_POST["editarServicioInfoProducto"];
       $editarServicio->servicioPresupuestoEditar = $_POST["servicioPresupuestoEditar"];
-      $editarServicio->servicioPresupuestoEditar = $_POST["idCLienteServicio"];
+      // $editarServicio->servicioPresupuestoEditar = $_POST["idCLienteServicio"];
       
       $editarServicio->ajaxEditarServicio();
 }

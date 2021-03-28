@@ -12,6 +12,7 @@ $colores = array("red","green","yellow","aqua","purple","blue","cyan","magenta",
 $totalVentas = ControladorProductos::ctrMostrarSumaVentas();
 
 
+
 ?>
 
 <!--=====================================
@@ -38,6 +39,8 @@ PRODUCTOS MÁS VENDIDOS
 
   <!-- /.box-header -->
   <div class="box-body">
+
+  <?php if(empty($totalVentas)): ?>
 
     <div class="row">
 
@@ -71,8 +74,12 @@ PRODUCTOS MÁS VENDIDOS
       <!-- /.col -->
     </div>
     <!-- /.row -->
+
+    <?php endif ?>
   </div>
   <!-- /.box-body -->
+  <?php if (empty($totalVentas)): ?>
+  
   <div class="box-footer no-padding">
 
     <ul class="nav nav-pills nav-stacked">
@@ -80,14 +87,24 @@ PRODUCTOS MÁS VENDIDOS
       <?php
 
         for ($i=0; $i < 5; $i++) { 
-          # code...
+
+          //Si esta vacio el array
+          if(!empty($totalVentas)){
+
+            $total = 0;
+
+          }else{
+
+            $total = $productos[$i]["ventas"]*100/$totalVentas["total"];
+
+          }
 
           echo '<li> 
 
                 <a href="#">'. $productos[$i]['nombre'].'
 
                   <span class="pull-right text-'.$colores[$i].'">
-                  <i class="fa fa-angle-down"></i> '.ceil($productos[$i]["ventas"]*100/$totalVentas["total"]).' %</span>
+                  <i class="fa fa-angle-down"></i> '.ceil($total).' %</span>
                 
                 </a>
 
@@ -100,11 +117,14 @@ PRODUCTOS MÁS VENDIDOS
     </ul>
 
   </div>
+
+  <?php endif ?>
   <!-- /.footer -->
 </div>
 <!-- /.box -->
 </div>
-<script>
+<?php if (empty($totalVentas)): ?>
+  <script>
 
 // -------------
   // - PIE CHART -
@@ -162,3 +182,5 @@ PRODUCTOS MÁS VENDIDOS
   // -----------------
 
 </script>
+
+<?php endif ?>

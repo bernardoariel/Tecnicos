@@ -107,7 +107,7 @@ $("#selectCliente").change(function(){
 	//alert($(this).val());
 	var idVerClienteEditar = $(this).val();
 	console.log('idVerClienteEditar: ', idVerClienteEditar);
-	if(idVerClienteEditar==1||idVerClienteEditar=="OCACIONAL"){
+	if(idVerClienteEditar==0){
 
 		$("#servicioCliente").val("INGRESE EL NOMBRE");
 		$("#servicioTelefono").val("0000000000");
@@ -203,24 +203,19 @@ $("#btnCrearServicio").on("click", function(){
 	
 	var servicioCliente = $("#servicioCliente").val();
   var servicioTelefono = $("#servicioTelefono").val(); 
-  var servicioProducto = $("#servicioProducto").val();
+  var servicioProductoId = $("#servicioProducto").val();
 	var servicioProblema = $("#servicioProblema").val(); 
 	var servicioProductoInfo = $("#servicioProductoInfo").val(); 
 	var servicioIdUsuario = $("#servicioIdUsuario").val(); 
   var servicioPresupuesto = $("#servicioPresupuesto").val();
   var idCLienteServicio =	$("#idCLienteServicio").val();
-	console.log("servicioCliente", servicioCliente);
-  console.log("servicioTelefono", servicioTelefono);
-	console.log("servicioProducto", servicioProducto);
-	console.log("servicioProblema", servicioProblema);
-	console.log("servicioProductoInfo", servicioProductoInfo);
-	console.log("servicioPresupuesto", servicioPresupuesto);
 
-  	// LOS CARGO EN EL FORMDATA DE UN AJAX
+
+  // LOS CARGO EN EL FORMDATA DE UN AJAX
 	var datos = new FormData();
 	datos.append("servicioCliente", servicioCliente);
 	datos.append("servicioTelefono", servicioTelefono);
-	datos.append("servicioProducto", servicioProducto);
+	datos.append("servicioProductoId", servicioProductoId);
 	datos.append("servicioProblema", servicioProblema);
 	datos.append("servicioProductoInfo", servicioProductoInfo);
 	datos.append("servicioIdUsuario", servicioIdUsuario);
@@ -235,7 +230,7 @@ $("#btnCrearServicio").on("click", function(){
       contentType: false,
       processData: false,
       success:function(respuesta){
-          console.log("respuesta", respuesta);
+          console.log("respuesta--2", respuesta);
           let subrespuesta = respuesta.substr(0, 7);
 
           switch (subrespuesta){
@@ -412,26 +407,27 @@ $("#btnEditarServicio").on("click", function(){
       //TOMO LA VARIABLE DEL BOTON
       var idServicio = $("#idServicioEditar").val();
       var editarServicioTelefono = $("#servicioTelefonoEditar").val(); 
-      var servicioProductoEditar =$("#servicioProductoEditar option:selected").text();
+      var servicioProductoEditarId =$("#servicioProductoEditar").val();
       var editarServicioProblema = $("#servicioProblemaEditar").val();
       var editarServicioInfoProducto = $("#servicioProductoInfoEditar").val();
       var servicioPresupuestoEditar = $("#servicioPresupuestoEditar").val();
 
       console.log("idServicio", idServicio);
       console.log("editarServicioTelefono", editarServicioTelefono);
-      console.log("servicioProductoEditar", servicioProductoEditar);
-      console.log("editarServicioProblema", editarServicioProblema);
+     console.log("editarServicioProblema", editarServicioProblema);
+      console.log("servicioProductoEditarId--->", servicioProductoEditarId);
       console.log("editarServicioInfoProducto", editarServicioInfoProducto);
       console.log("servicioPresupuestoEditar", servicioPresupuestoEditar);
-
+      console.log("servicioPresupuestoEditar", servicioPresupuestoEditar);
       // LOS CARGO EN EL FORMDATA DE UN AJAX
       var datos = new FormData();
       datos.append("idServicio", idServicio);
       datos.append("editarServicioTelefono", editarServicioTelefono);
-      datos.append("servicioProductoEditar", servicioProductoEditar);
-      datos.append("editarServicioProblema", editarServicioProblema);
+      datos.append("servicioProductoEditarId", servicioProductoEditarId);
+      datos.append("editarServicioProblema",editarServicioProblema);
       datos.append("editarServicioInfoProducto", editarServicioInfoProducto);
       datos.append("servicioPresupuestoEditar", servicioPresupuestoEditar);
+      
       //HAGO UN AJAX SIN JSON
        $.ajax({
           url:"ajax/servicios.ajax.php",
@@ -747,6 +743,8 @@ $(".tablaServicios tbody").on("click", "button.btnTerminarServicio", function(){
 
 
 $(".btnModalTerminarServicio").on("click",function(){
+  let idEstadoTerminar = $(this).attr("estadoterminar");
+  
 
   var servicioPrecioTerminar =  $("#servicioPrecioTerminar").val();
   var servicioProductoInfoTerminar = $("#servicioProductoInfoTerminar").val();
@@ -757,10 +755,7 @@ $(".btnModalTerminarServicio").on("click",function(){
   console.log("servicioProductoInfoTerminar", servicioProductoInfoTerminar);
   console.log("servicioIdUsuarioTerminar", servicioIdUsuarioTerminar);
   console.log("idServicioTerminar", idServicioTerminar);
-  
-  
 
-   
 
   var servicios = new FormData();
   servicios.append("servicioPrecioTerminar",  servicioPrecioTerminar);
@@ -778,6 +773,7 @@ $(".btnModalTerminarServicio").on("click",function(){
       processData: false,
 
       success:function(respuesta){
+      console.log('respuesta: ', respuesta);
 
        if(respuesta=="ok"){
          swal({
@@ -789,7 +785,16 @@ $(".btnModalTerminarServicio").on("click",function(){
                                 
                                 if (result.value) {
 
-                                  window.location = "index.php?ruta=servicios&vista=terminado";
+                                  if(idEstadoTerminar==2){
+
+                                    window.location = "index.php?ruta=servicios&vista=reparacion";
+
+                                  }else{
+
+                                    window.location = "index.php?ruta=servicios&vista=terminado";
+
+                                  }
+                                  
 
                                 }
 

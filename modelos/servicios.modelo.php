@@ -101,34 +101,41 @@ class ModeloServicios{
 
   $stmt = null;
  }
- /*=============================================
+  /*=============================================
 	CREAR SERVICIO
 	=============================================*/
 
- static public function mdlNuevoServicio($tabla, $datos)
- {
+ static public function mdlNuevoServicio($tabla, $datos){
 
-  $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (`cliente`, `telefono`, `producto`, `producto_info`, `problema`,  `id_usuario_creacion`,`presupuesto`) VALUES(:cliente, :telefono, :producto, :producto_info, :problema, :id_usuario_creacion,:presupuesto)");
+   $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla 
+   (`id_cliente`,`cliente`, `telefono`, `id_producto` , `producto`, `producto_info`, `problema`, `id_usuario_creacion`, `presupuesto`) VALUES
+   (:id_cliente ,:cliente , :telefono , :id_producto, :producto , :producto_info , :problema , :id_usuario_creacion , :presupuesto )");
 
-  $stmt->bindParam(":cliente", $datos["cliente"], PDO::PARAM_STR);
-  $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
-  $stmt->bindParam(":producto", $datos["producto"], PDO::PARAM_STR);
-  $stmt->bindParam(":producto_info", $datos["producto_info"], PDO::PARAM_STR);
-  $stmt->bindParam(":problema", $datos["problema"], PDO::PARAM_STR);
-  $stmt->bindParam(":id_usuario_creacion", $datos["id_usuario_creacion"], PDO::PARAM_INT);
-  $stmt->bindParam(":presupuesto", $datos["presupuesto"], PDO::PARAM_STR);
+   $stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
+   $stmt->bindParam(":cliente", $datos["cliente"], PDO::PARAM_STR);
+   $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+   $stmt->bindParam(":id_producto", $datos["id_producto"], PDO::PARAM_INT);
+   $stmt->bindParam(":producto", $datos["producto"], PDO::PARAM_STR);
+   $stmt->bindParam(":producto_info", $datos["producto_info"], PDO::PARAM_STR);
+   $stmt->bindParam(":problema", $datos["problema"], PDO::PARAM_STR);
+   $stmt->bindParam(":id_usuario_creacion", $datos["id_usuario_creacion"], PDO::PARAM_INT);
+   $stmt->bindParam(":presupuesto", $datos["presupuesto"], PDO::PARAM_STR);
+   
+   
 
-  if ($stmt->execute()) {
+   if ($stmt->execute()){
 
-   return "ok";
-  } else {
+     return "ok";
 
-   // return $stmt->errorInfo();
-   return "error";
-  }
+   }else{
+
+      $stmt->errorInfo();
+
+   }
 
   $stmt->close();
   $stmt = null;
+  
  }
 
  /*=============================================
@@ -147,7 +154,7 @@ class ModeloServicios{
    return "ok";
   } else {
 
-   return "error";
+   return $stmt->errorInfo();	
   }
 
   $stmt->close();
@@ -155,33 +162,35 @@ class ModeloServicios{
   $stmt = null;
  }
 
- /*=============================================
-	EDITAR CLIENTE
-	=============================================*/
+   /*=============================================
+   EDITAR CLIENTE
+   =============================================*/
+   static public function mdlEditarServicio($tabla, $datos){
 
- static public function mdlEditarServicio($tabla, $datos){
+      $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET  telefono = :telefono , id_producto = :id_producto, producto = :producto, producto_info =:producto_info, problema =:problema, presupuesto =:presupuesto WHERE id = :id");
 
-  $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET  telefono = :telefono , producto = :producto, producto_info =:producto_info, problema =:problema, presupuesto =:presupuesto WHERE id = :id");
+      $stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+      $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
+      $stmt->bindParam(":id_producto", $datos["id_producto"], PDO::PARAM_INT);
+      $stmt->bindParam(":producto", $datos["producto"], PDO::PARAM_STR);
+      $stmt->bindParam(":producto_info", $datos["producto_info"], PDO::PARAM_STR);
+      $stmt->bindParam(":problema", $datos["problema"], PDO::PARAM_STR);
+      $stmt->bindParam(":presupuesto", $datos["presupuesto"], PDO::PARAM_STR);
 
-  $stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
-  $stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
-  $stmt->bindParam(":producto", $datos["producto"], PDO::PARAM_STR);
-  $stmt->bindParam(":producto_info", $datos["producto_info"], PDO::PARAM_STR);
-  $stmt->bindParam(":problema", $datos["problema"], PDO::PARAM_STR);
-  $stmt->bindParam(":presupuesto", $datos["presupuesto"], PDO::PARAM_STR);
+      if ($stmt->execute()) {
 
-  if ($stmt->execute()) {
+         return "ok";
 
-   return "ok";
-  } else {
+      }else{
 
-   return "error";
-  }
+         return $stmt->errorInfo();	
 
+      }
 
-  $stmt->close();
-  $stmt = null;
- }
+      $stmt->close();
+      $stmt = null;
+      
+}
 
 
 
@@ -234,7 +243,7 @@ class ModeloServicios{
    return "ok";
   } else {
 
-   return "error";
+   return $stmt->errorInfo();	
   }
 
 
@@ -262,7 +271,7 @@ class ModeloServicios{
    return "ok";
   } else {
 
-   return "error";
+   return $stmt->errorInfo();	
   }
 
 
@@ -287,9 +296,7 @@ class ModeloServicios{
 
    static public function mdlModificarVentas($item,$valor,$modo){
 
-      $stmt = Conexion::conectar()->prepare("update productos set ventas=ventas$modo where $item=:valor; ");
-      
-      $stmt->bindParam(":valor", $valor, PDO::PARAM_STR);
+      $stmt = Conexion::conectar()->prepare("update productos set ventas=ventas$modo where $item=$valor");
 
       if ($stmt->execute()){
          

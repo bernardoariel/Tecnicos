@@ -178,7 +178,7 @@ class ControladorClientes{
 					           "telefono"=>$datos["telefono"],
 					           "obs"=>".");
 			    
-			    $respuesta = ModeloClientes::mdlNuevoCliente($tabla, $datos);
+			    $respuesta = ModeloClientes::mdlNuevoClienteServicios($tabla, $datos);
 			  	//doy la respuesta ok/error
 			    return $respuesta;
 

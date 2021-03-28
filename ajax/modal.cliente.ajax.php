@@ -1,7 +1,6 @@
 <!--=====================================
       AGREGAR SERVICIO
 ======================================-->
-
 <div id="modalAgregarServicio" class="modal fade" role="dialog">
 
   <div class="modal-dialog">
@@ -35,7 +34,7 @@
 
             <select id="selectCliente" class="form-control select2 input-lg" style="width: 100%;height: 50px;">
 
-              <!-- <option value="0">-</option> -->
+              <option value="0">-</option>
               <!-- <option value="OCACIONAL">OCACIONAL</option> -->
 
               <?php
@@ -90,7 +89,6 @@
 
           </div>
 
-
           <!-- ENTRADA PARA EL PRODUCTO -->
           <div class="form-group">
 
@@ -102,27 +100,26 @@
               
               <?php
 
-              /*=============================================
+                /*=============================================
                 //        MOSTRAR PRODUCUTOS
                 //=============================================*/
-              $item = null;
-              $valor = null;
-              $orden = null;
-              $forma = "ASC";
-              $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden, $forma);
+                $item = null;
+                $valor = null;
+                $orden = null;
+                $forma = "ASC";
+                $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden, $forma);
 
               ?>
 
               <?php foreach ($productos as $key => $value) : ?>
 
-                <option value="<?php echo $value['nombre']; ?>"><?php echo $value['nombre']; ?></option>
+                <option value="<?php echo $value['id']; ?>"><?php echo $value['nombre']; ?></option>
 
               <?php endforeach ?>
 
             </select>
 
           </div>
-
 
           <!-- ENTRADA PARA EL PRODUCTO -->
           <div class="form-group">
@@ -170,10 +167,7 @@
 
           </div>
 
-
         </div>
-
-
 
         <!--=====================================
         PIE DEL MODAL
@@ -183,7 +177,6 @@
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <!-- <button type="submit" class="btn btn-primary">Guardar cliente</button> -->
           <button type="button" id="btnCrearServicio" class="btn btn-danger pull-right">Guardar Servicio</button>
 
         </div>
