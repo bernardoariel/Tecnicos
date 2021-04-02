@@ -113,13 +113,18 @@ class ModeloClientes{
 	=============================================*/
 
 	static public function mdlNuevoCliente($tabla, $datos){
-
-		$stmt = Conexion::conectar()->prepare("INSERT INTO `clientes`(`nombre`, `direccion`, `telefono`, `obs`) VALUES(:nombre,:direccion,:telefono,:obs)");
+		
+		$stmt = Conexion::conectar()->prepare("INSERT INTO `clientes`
+		(`nombre`, `direccion`, `cod_pais`, `telefono`, `whatsapp`, `email`, `obs`) VALUES
+		(:nombre , :direccion , :cod_pais , :telefono , :whatsapp , :email , :obs)");
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":cod_pais", $datos["cod_pais"], PDO::PARAM_STR);
 		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
 		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
+		$stmt->bindParam(":whatsapp", $datos["whatsapp"], PDO::PARAM_STR);
+		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
 		$stmt->bindParam(":obs", $datos["obs"], PDO::PARAM_STR);
-		$stmt->execute();
+		
 
 		if ($stmt->execute()){
 
@@ -160,10 +165,6 @@ class ModeloClientes{
 
 	}
 
-
-
-
-	
 	/*=============================================
 	MOSTRAR CLIENTES SIN INCLUIR EL REGISTRO QUE INGRESO
 	=============================================*/

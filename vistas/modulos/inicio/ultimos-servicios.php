@@ -58,22 +58,9 @@
                             <td><?php echo $value['cliente']; ?></td>
 
                             <?php
-                                switch ($value['estado']) {
-
-                                case 1:
-                                echo '<td><span class="label label-info">'.$value['estado'].'-Pendientes</span></td>';
-                                break;
-                                case 2:
-                                echo '<td><span class="label label-warning">'.$value['estado'].'-En reparacion</span></td>';  
-                                break;
-                                case 3:
-                                echo '<td><span class="label label-success">'.$value['estado'].'-Terminados</span></td>';  
-                                break;
-                                case 4:
-                                echo '<td><span class="label label-danger">'.$value['estado'].'-Entregados</span></td>';  
-                                break;  
-
-                                }
+                            $tipoServicio = ControladorPlantilla::servicioEstado($value['estado']);
+                            echo ' <td><a href="'.$tipoServicio['link'].'">' . $tipoServicio['estado']. '</a></td>';
+                     
 
                             ?>
 

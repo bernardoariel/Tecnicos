@@ -105,7 +105,7 @@
 
                                         <td>';
 
-                                        if ($value["id"] >1) {
+                                     
 
                                             echo '<div class="btn-group">
                           
@@ -114,7 +114,6 @@
                                               <button class="btn btn-danger btnEliminarProducto btn-flat" idProducto="' . $value["id"] . '"><i class="fa fa-times"></i></button>
 
                                                   </div>';
-                                    }
 
                                     echo '</td>
 

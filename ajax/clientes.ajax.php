@@ -67,6 +67,9 @@ class AjaxClientes{
   public $nuevaDireccion;
   public $nuevoTelefono;
   public $nuevoObs;
+  public $nuevoCodPais;
+  public $nuevoWs;
+  public $nuevoEmail;
 
   public function ajaxNuevoCliente(){
 
@@ -82,7 +85,10 @@ class AjaxClientes{
 
     	$datos = array("nombre" => strtoupper($this->nuevoCliente),
                	   "direccion"=>strtoupper($this->nuevaDireccion),
+                    "cod_pais"=>strtoupper($this->nuevoCodPais),
                	   "telefono"=>strtoupper($this->nuevoTelefono),
+               	   "email"=>strtoupper($this->nuevoEmail),
+               	   "whatsapp"=>strtoupper($this->nuevoWs),
                	   "obs"=>strtoupper($this->nuevoObs));
 
 	  	$respuesta = ControladorClientes::ctrNuevoCliente($datos);
@@ -151,6 +157,10 @@ if(isset($_POST["nuevoCliente"])){
 	$editarCliente -> nuevaDireccion = $_POST["nuevaDireccion"];
 	$editarCliente -> nuevoTelefono = $_POST["nuevoTelefono"];
 	$editarCliente -> nuevoObs = $_POST["nuevoObs"];
+
+  $editarCliente -> nuevoCodPais = $_POST["nuevoCodPais"];
+  $editarCliente -> nuevoWs = $_POST["nuevoWs"];
+  $editarCliente -> nuevoEmail = $_POST["nuevoEmail"];
 
 	$editarCliente -> ajaxNuevoCliente();
 

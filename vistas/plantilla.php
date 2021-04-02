@@ -41,6 +41,9 @@ $empresa = ControladorEmpresa::ctrMostrarEmpresa($item, $valor);
   <!-- Theme style -->
   <link rel="stylesheet" href="vistas/dist/css/AdminLTE.css">
 
+  <!-- Mi estilo propio -->
+  <link rel="stylesheet" href="vistas/css/style.css">
+
   <!-- AdminLTE Skins -->
   <link rel="stylesheet" href="vistas/dist/css/skins/_all-skins.min.css">
 
@@ -105,7 +108,9 @@ $empresa = ControladorEmpresa::ctrMostrarEmpresa($item, $valor);
   <script src="vistas/plugins/jqueryNumber/jquerynumber.min.js"></script>
 
   <!-- daterangepicker http://www.daterangepicker.com/-->
-  <script src="vistas/bower_components/moment/min/moment.min.js"></script>
+  <!-- <script src="vistas/bower_components/moment/min/moment.min.js"></script> -->
+  <script src="vistas/bower_components/moment/min/moment-with-locales.js"></script>
+
   <script src="vistas/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 
   <!-- Morris.js charts http://morrisjs.github.io/morris.js/-->
@@ -170,7 +175,7 @@ CUERPO DOCUMENTO
         $_GET["ruta"] == "miempresa" ||
         $_GET["ruta"] == "productos" ||
         $_GET["ruta"] == "entregados" ||
-        $_GET["ruta"] == "ctacorriente" ||
+        $_GET["ruta"] == "reportes" ||
         $_GET["ruta"] == "buscar-venta-nro" ||
         $_GET["ruta"] == "buscar-venta-cliente" ||
         $_GET["ruta"] == "buscar-venta-repuestos" ||
@@ -186,7 +191,6 @@ CUERPO DOCUMENTO
         $_GET["ruta"] == "todos-los-servicios" ||
         $_GET["ruta"] == "imprimiretiqueta" ||
         $_GET["ruta"] == "editar-perfil" ||
-        $_GET["ruta"] == "reportes" ||
         $_GET["ruta"] == "gastos" ||
         $_GET["ruta"] == "salir"
       ) {
@@ -224,6 +228,7 @@ CUERPO DOCUMENTO
   <script src="vistas/js/servicios.js"></script>
   <script src="vistas/js/inicio.js"></script>
   <script src="vistas/js/todos-los-servicios.js"></script>
+  <script src="vistas/js/entregados.js"></script>
 
 </body>
 

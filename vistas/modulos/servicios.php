@@ -1,4 +1,3 @@
-
 <?php include('ajax/modal.cliente.ajax.php'); ?>
 <?php
 
@@ -8,26 +7,34 @@
     $vista1= $_GET["vista"];
 
     switch ($vista) {
-      case 'pendientes':
 
+      case 'pendientes':
+        
+        $vista1Nombre = "1: pendientes";
         $vista2 = "reparacion";
         $vista3 = "terminado";
+        $vista2Nombre = "2: reparacion";
+        $vista3Nombre = "3: terminado";
         echo '<style>.nav-tabs-custom > .nav-tabs > li.active {
           border-top-color: #1266F1;}</style>';
         break;
 
       case 'reparacion':
-
+        $vista1Nombre= "2: ".$_GET["vista"];
         $vista2 = 'pendientes';
         $vista3 = "terminado";
+        $vista2Nombre = '1: pendientes';
+        $vista3Nombre = "3: terminado";
         echo '<style>.nav-tabs-custom > .nav-tabs > li.active {
           border-top-color: #FFA900;}</style>';
         break;
 
       case 'terminado':
-
+        $vista1Nombre= "3: ".$_GET["vista"];
         $vista2 = 'pendientes';
         $vista3 = 'reparacion';
+        $vista2Nombre = '1: pendientes';
+        $vista3Nombre = '2: reparacion';
         echo '<style>.nav-tabs-custom > .nav-tabs > li.active {
           border-top-color: #00B74A;}</style>';
         break;
@@ -35,13 +42,18 @@
     }
 
   }else{
-
+    
     $vista = "pendientes";
-    $vista1 = "pendientes";
-    $vista2 = "reparacion";
-    $vista3 = "terminado";
+    $vista1 = "1: pendientes";
+    $vista2 = "2: reparacion";
+    $vista3 = "3: terminado";
+    $vista1Nombre = "1: pendientes";
+    $vista2Nombre = "2: reparacion";
+    $vista3Nombre = "3: terminado";
 
   }
+  
+
 
 ?>
 <div class="content-wrapper">
@@ -77,9 +89,9 @@
           <div class="nav-tabs-custom">
             <!-- Tabs within a box -->
             <ul class="nav nav-tabs pull-right">
-              <li class="active" id="li<?php echo $vista1; ?>"><a href="#<?php echo $vista1; ?>"  data-toggle="tab"><?php echo $vista1; ?></a></li>
-              <li id="li<?php echo $vista2; ?>"><a href="#<?php echo $vista2; ?>" data-toggle="tab"><?php echo $vista2; ?></a></li>
-              <li id="li<?php echo $vista3; ?>"><a href="#<?php echo $vista3; ?>" data-toggle="tab"><?php echo $vista3; ?></a></li>
+              <li class="active" id="li<?php echo $vista1; ?>"><a href="#<?php echo $vista1; ?>"  data-toggle="tab"><?php echo $vista1Nombre; ?></a></li>
+              <li id="li<?php echo $vista2; ?>"><a href="#<?php echo $vista2; ?>" data-toggle="tab"><?php echo $vista2Nombre; ?></a></li>
+              <li id="li<?php echo $vista3; ?>"><a href="#<?php echo $vista3; ?>" data-toggle="tab"><?php echo $vista3Nombre; ?></a></li>
               <button class="btn btn-danger pull-left btn-flat" data-toggle="modal" data-target="#modalAgregarServicio">
                 Agregar servicios
               </button>

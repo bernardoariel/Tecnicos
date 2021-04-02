@@ -94,12 +94,13 @@ class ControladorClientes{
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ '.$CARACTERES.']+$/', $datos["nombre"]) &&		   
 			   preg_match('/^[#\.\-a-zA-Z0-9 '.$CARACTERES.']+$/', $datos["direccion"])){
 
+				
 			   	$tabla = "clientes";
 
-			   	$datos = array("nombre"=>strtoupper($_POST["nuevoCliente"]),
-					           "direccion"=>strtoupper($_POST["nuevaDireccion"]),
-					           "telefono"=>$_POST["nuevoTelefono"],
-					           "obs"=>strtoupper($_POST["nuevoObs"]));
+			   	// $datos = array("nombre"=>strtoupper($_POST["nuevoCliente"]),
+				// 	           "direccion"=>strtoupper($_POST["nuevaDireccion"]),
+				// 	           "telefono"=>$_POST["nuevoTelefono"],
+				// 	           "obs"=>strtoupper($_POST["nuevoObs"]));
 			    
 			    $respuesta = ModeloClientes::mdlNuevoCliente($tabla, $datos);
 			  	//doy la respuesta ok/error

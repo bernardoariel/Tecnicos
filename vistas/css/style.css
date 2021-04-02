@@ -1,0 +1,15 @@
+/* DEL SELECT */
+.swal2-shown{
+    display: flex;
+    height: 100vh;
+}
+/* INPUT PENDIENTES */
+.inputTerminadoPendiente{
+    
+    color: #1266F1;
+}
+/* INPUT TERMINADOS */
+.inputTerminadoTerminado{
+    
+    color: rgb(0, 183, 74);
+}

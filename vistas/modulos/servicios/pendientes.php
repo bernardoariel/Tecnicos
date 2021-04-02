@@ -27,6 +27,7 @@
           $orden = null;
           $forma = null;
           $estado = 1;
+          
           if(isset($_GET["orden"])){
             
             $orden = $_GET["orden"];

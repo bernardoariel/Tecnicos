@@ -151,10 +151,11 @@ class ModeloServicios{
 
   if ($stmt->execute()) {
 
-   return "ok";
+      return "ok";
+
   } else {
 
-   return $stmt->errorInfo();	
+      return $stmt->errorInfo();	
   }
 
   $stmt->close();
@@ -320,5 +321,72 @@ class ModeloServicios{
       $stmt->execute();
 
       return $stmt->fetchAll();
+
    }
+   /*=============================================
+	MOSTRAR TODOS LOS REGISTROS
+	=============================================*/
+
+	static public function mdlFiltrarTodosLosRegistros($tabla,$tServEstado,$tServFecha1,$tServFecha2){
+
+      
+      
+      //si no se pidio filtrado de nada
+      if($tServEstado == "0"){
+         
+         if($tServFecha2 == "null"){
+           
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+            $stmt -> execute();
+   
+            return $stmt -> fetchAll();
+
+         }elseif($tServFecha2 != "null"){
+            
+            $fechaInicial = $tServFecha1." 00:00:00";
+            $fechaFinal = $tServFecha2." 23:59:59";
+            
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla where fecha BETWEEN '$fechaInicial' AND '$fechaFinal' ");
+   
+            $stmt->bindParam(":estado", $tServEstado, PDO::PARAM_INT);
+     
+   
+            $stmt -> execute();
+   
+            return $stmt -> fetchAll();
+         }
+         
+
+      }elseif($tServEstado != "0"){//estado diferente a null y fechas null
+        
+         if($tServFecha2 == "null"){
+            
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla where estado =".$tServEstado);
+            
+
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+
+         }elseif($tServFecha2 != "null"){
+
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla where estado =".$tServEstado);
+        
+            $stmt->bindParam(":estado", $tServEstado, PDO::PARAM_INT);
+
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+
+         }
+        
+
+        
+         
+
+      }
+
+   }
+
 }

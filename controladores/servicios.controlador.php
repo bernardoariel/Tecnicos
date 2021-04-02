@@ -242,4 +242,20 @@ class ControladorServicios{
        return $respuesta;
  }
 
+       /*=============================================
+       MOSTRAR VENTAS
+       =============================================*/
+
+       static public function ctrFiltrarTodosLosRegistros($tServEstado,$tServFecha1,$tServFecha2){
+
+              $tabla = "servicios";
+
+              $respuesta = ModeloServicios::mdlFiltrarTodosLosRegistros($tabla,$tServEstado,$tServFecha1,$tServFecha2);
+
+              return $respuesta;
+
+       }
+
+       
+
 }

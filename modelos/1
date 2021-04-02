@@ -1,9 +1,0 @@
-[id_cliente] => 1
-    [cliente] => ARIEL BERNARDO
-    [telefono] => (370) 456-4650
-    [id_producto] => 1
-    [producto] => CELULAR
-    [producto_info] => 213
-    [problema] => 13
-    [id_usuario_creacion] => 62
-    [presupuesto] => 5

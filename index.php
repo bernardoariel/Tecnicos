@@ -24,6 +24,8 @@ require_once "modelos/empresa.modelo.php";
 #empresa
 require_once "controladores/servicios.controlador.php";
 require_once "modelos/servicios.modelo.php";
-
+#reportes
+require_once "controladores/reportes.controlador.php";
+require_once "modelos/reportes.modelo.php";
 $plantilla = new ControladorPlantilla();
 $plantilla -> ctrPlantilla();

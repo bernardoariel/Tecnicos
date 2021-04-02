@@ -121,7 +121,7 @@
 
                     <td>';
 
-                if($value["id"]>2){
+                
 
                   echo '<div class="btn-group">
                           
@@ -130,7 +130,7 @@
                           <button class="btn btn-danger btn-flat btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>
 
                         </div>'; 
-                }   
+                
 
             echo '</td>
 
@@ -218,18 +218,63 @@
 
             </div>
 
-             <div class="form-group">
+            <!-- ENTRADA PARA EL TELEFONO -->
+            <div class="form-group">
+
+              <div class="row">
+
+                <div class="col-md-3">
+
+                  <label for="">Cod.Pais</label>
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><input type="checkbox" class="checkbox" name="nuevoChkCodPais" id="nuevoChkCodPais" checked></span> 
+
+                    <input type="text" class="form-control input-lg" name="nuevoCodPais" id="nuevoCodPais" placeholder="Ingresar codigo"  value="549"  readonly>
+
+                  </div>
+
+                </div>
+             
+                <div class="col-md-6">
+                  
+                  <label for="">Nro.Telefono</label>
+
+                  <div class="input-group">
+                    <!-- ENTRADA PARA EL TELÉFONO -->
+                    <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
+
+                    <input type="text" class="form-control input-lg inputNuevo" name="nuevoTelefono" id="nuevoTelefono"  placeholder="Ingresar teléfono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+
+                  </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                  <label for="">Tiene Whatsapp?</label>
+
+                  <div class="input-group">
+                    <!-- ENTRADA PARA EL TELÉFONO -->
+                    <div class="checkbox">
+
+                      <label for="whatsapp">
+
+                        <input type="checkbox" class="checkbox" name="nuevoWs" id="nuevoWs" checked>Sí
+
+                      </label>
+
+                    </div>
+
+                  </div>
+
+                </div>
               
-              <div class="input-group">
-                 <!-- ENTRADA PARA EL TELÉFONO -->
-                <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
-
-                <input type="text" class="form-control input-lg inputNuevo" name="nuevoTelefono" id="nuevoTelefono"  placeholder="Ingresar teléfono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
-
-
-              </div>
-
+              </div> <!-- row -->
+              
             </div>
+
 
             <!-- ENTRADA PARA SELECCIONAR SU TIPO DE IVA -->
             <div class="form-group">
@@ -240,6 +285,49 @@
                 
                 <input type="text" class="form-control input-lg inputNuevo" name="nuevoObs" id="nuevoObs" placeholder="Ingresar Comentario">
 
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA LA DIRECCIÓN -->
+            <div class="form-group">
+
+              <div class="row">
+
+                <div class="col-md-6">
+
+                  <div class="input-group">
+                
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
+
+                    <select name="nuevoConsultaMail" id="nuevoConsultaMail" class="form-control input-lg">
+
+                      <option value="si">Tiene Email</option>
+                      <option value="no" selected>No Tiene Email</option>
+                      
+                    </select>
+                    
+                  </div>
+                
+                </div>
+
+                <div class="col-md-6">
+
+                  <!-- ENTRADA PARA SELECCIONAR SU TIPO DE IVA -->
+                  <div class="form-group">
+                    
+                    <div class="input-group">
+                    
+                      <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span> 
+                      
+                      <input type="text" class="form-control input-lg" name="nuevoEmail" id="nuevoEmail" placeholder="Ingresar Email" readonly>
+
+                    </div>
+
+                  </div>
+                
+                </div>
+                
               </div>
 
             </div>
@@ -322,7 +410,6 @@
 
             </div>
 
-
             <!-- ENTRADA PARA LA DIRECCIÓN -->
             <div class="form-group">
               
@@ -336,16 +423,61 @@
 
             </div>
 
+            <!-- ENTRADA PARA EL TELEFONO -->
             <div class="form-group">
+
+              <div class="row">
+
+                <div class="col-md-3">
+
+                  <label for="">Cod.Pais</label>
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><input type="checkbox" class="checkbox" name="editarChkCodPais" id="editarChkCodPais" checked></span> 
+
+                    <input type="text" class="form-control input-lg" name="editarCodPais" id="editarCodPais" placeholder="Ingresar codigo"  value="549"  readonly>
+
+                  </div>
+
+                </div>
+             
+                <div class="col-md-6">
+                  
+                  <label for="">Nro.Telefono</label>
+
+                  <div class="input-group">
+                    <!-- ENTRADA PARA EL TELÉFONO -->
+                    <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
+
+                    <input type="text" class="form-control input-lg" name="editarTelefono" id="editarTelefono" placeholder="Ingresar teléfono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+
+                  </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                  <label for="">Tiene Whatsapp?</label>
+
+                  <div class="input-group">
+                    <!-- ENTRADA PARA EL TELÉFONO -->
+                    <div class="checkbox">
+
+                      <label for="whatsapp">
+
+                        <input type="checkbox" class="checkbox" name="editarWs" id="editarWs" checked>Sí
+
+                      </label>
+
+                    </div>
+
+                  </div>
+
+                </div>
               
-              <div class="input-group">
-                 <!-- ENTRADA PARA EL TELÉFONO -->
-                <span class="input-group-addon"><i class="fa fa-phone"></i></span> 
-
-                <input type="text" class="form-control input-lg" name="editarTelefono" id="editarTelefono" placeholder="Ingresar teléfono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
-
-              </div>
-
+              </div> <!-- row -->
+              
             </div>
 
             <!-- ENTRADA PARA SELECCIONAR SU TIPO DE IVA -->
@@ -357,6 +489,47 @@
                 
                 <input type="text" class="form-control input-lg" name="editarObs" id="editarObs" placeholder="Ingresar Comentario">
 
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA LA DIRECCIÓN -->
+            <div class="form-group">
+
+              <div class="row">
+
+                <div class="col-md-6">
+
+                  <div class="input-group">
+                
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
+
+                    <select name="editarConsultaMail" id="editarConsultaMail" class="form-control input-lg" >
+                      <option value="si">Tiene Email</option>
+                      <option value="no" selected>No Tiene Email</option>
+                    </select>
+                    
+                  </div>
+                
+                </div>
+
+                <div class="col-md-6">
+
+                  <!-- ENTRADA PARA SELECCIONAR SU TIPO DE IVA -->
+                  <div class="form-group">
+                    
+                    <div class="input-group">
+                    
+                      <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span> 
+                      
+                      <input type="text" class="form-control input-lg" name="editarEmail" id="editarEmail" placeholder="Ingresar Email" readonly>
+
+                    </div>
+
+                  </div>
+                
+                </div>
+                
               </div>
 
             </div>

@@ -50,6 +50,39 @@ class ControladorPlantilla{
 						
 		}
 	}
+	static public function servicioEstado($estado){
 
+		switch ($estado) {
+		
+			case 1:
+				$estado = "<span class='label label-info'>".$estado."-Pendientes</span>";
+				$link = "index.php?ruta=servicios&vista=pendientes";
+				$serEstado = array('estado'=>$estado,'link'=> $link);
+				return $serEstado;
+			break;
+		
+			case 2:
+				$estado = "<span class='label label-warning'>".$estado."-En reparacion</span>";  
+				$link = "index.php?ruta=servicios&vista=reparacion";
+				$serEstado = array('estado'=>$estado,'link'=> $link);
+				return $serEstado;
+			break;
+		
+			case 3:
+				$estado = "<span class='label label-success'>".$estado."-Terminados</span>";  
+				$link = "index.php?ruta=servicios&vista=terminado";
+				$serEstado = array('estado'=>$estado,'link'=> $link);
+				return $serEstado;
+			break;
+		
+			case 4:
+				$estado = "<span class='label label-danger'>".$estado."-Entregados</span>";  
+				$link = 'entregados';
+				$serEstado = array('estado'=>$estado,'link'=> $link);
+				return $serEstado;
+			break;  
+		
+		}
+	}
 
 }

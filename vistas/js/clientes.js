@@ -191,12 +191,22 @@ $("#btnCrearCliente").on("click",function(){
   var nuevaDireccion = $('#nuevaDireccion').val();
   var nuevoTelefono = $('#nuevoTelefono').val();
   var nuevoObs = $('#nuevoObs').val();
+
+  var nuevoCodPais = $('#nuevoCodPais').val();
+  
+  var nuevoWs = document.getElementById("editarChkCodPais").checked;
+ 
+  var nuevoEmail = $('#nuevoEmail').val();
+  
   // LOS CARGO EN EL FORMDATA DE UN AJAX
   var datos = new FormData();
   datos.append("nuevoCliente", nuevoCliente);
   datos.append("nuevaDireccion", nuevaDireccion);
   datos.append("nuevoTelefono", nuevoTelefono);
   datos.append("nuevoObs", nuevoObs);
+  datos.append("nuevoCodPais", nuevoCodPais);
+  datos.append("nuevoWs", nuevoWs);
+  datos.append("nuevoEmail", nuevoEmail);
   //HAGO UN AJAX 
   $.ajax({
       url:"ajax/clientes.ajax.php",
@@ -459,5 +469,58 @@ $("#editarObs").keypress(function(e) {
 
 });
 
+$("#nuevoChkCodPais").on("change", function(){
+ 
+  let chk=document.getElementById("nuevoChkCodPais").checked
 
+  if(chk){
+
+    $("#nuevoCodPais").attr("readonly", true);
+    
+  }else{
+
+    $("#nuevoCodPais").attr("readonly", false);
+    $("#nuevoCodPais").focus();
+  }
+  
+})
+$("#nuevoConsultaMail").on("change", function(){
+  
+  if($(this).val()=="si"){
+    $("#nuevoEmail").attr("readonly", false);
+    $("#nuevoEmail").focus();
+  }else{
+    $("#nuevoEmail").attr("readonly", true);
+   
+  }
+
+})
+
+$("#editarChkCodPais").on("change", function(){
+ 
+  let chk=document.getElementById("editarChkCodPais").checked
+
+  if(chk){
+
+    $("#editarCodPais").attr("readonly", true);
+    
+  }else{
+
+    $("#editarCodPais").attr("readonly", false);
+    $("#editarCodPais").focus();
+  }
+  
+})
+$("#editarConsultaMail").on("change", function(){
+  
+  if($(this).val()=="si"){
+
+    $("#editarEmail").attr("readonly", false);
+    $("#editarEmail").focus();
+  }else{
+    $("#editarEmail").attr("readonly", true);
+    
+  }
+
+})
 

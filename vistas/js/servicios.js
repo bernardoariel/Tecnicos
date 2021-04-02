@@ -104,19 +104,19 @@ $(".select2").keypress(function(e) {
 $("#selectCliente").change(function(){
 
 	$("#selectCliente .select2-selection__rendered").show();
-	//alert($(this).val());
-	var idVerClienteEditar = $(this).val();
-	console.log('idVerClienteEditar: ', idVerClienteEditar);
-	if(idVerClienteEditar==0){
+    //alert($(this).val());
+    var idVerClienteEditar = $(this).val();
+    console.log('idVerClienteEditar: ', idVerClienteEditar);
+    if(idVerClienteEditar==0){
 
-		$("#servicioCliente").val("INGRESE EL NOMBRE");
-		$("#servicioTelefono").val("0000000000");
-		$("#servicioCliente").focus();
-    $("#servicioCliente").select();
-    $("#idCLienteServicio").val("0");
-    idVerClienteEditar=1;
+      $("#servicioCliente").val("INGRESE EL NOMBRE");
+      $("#servicioTelefono").val("0000000000");
+      $("#servicioCliente").focus();
+      $("#servicioCliente").select();
+      $("#idCLienteServicio").val("0");
+      idVerClienteEditar=1;
 
-	}else{
+	  }else{
 		// LOS CARGO EN EL FORMDATA DE UN AJAX
 		var datos = new FormData();
 		datos.append("idVerClienteEditar", idVerClienteEditar);
@@ -244,7 +244,7 @@ $("#btnCrearServicio").on("click", function(){
                 focusConfirm:true
                 }).then(function(result){
                   if (result.value) {
-                    window.location = "index.php?ruta=servicios&orden=fechacreacion&vista=pendiente";
+                    window.location = "index.php?ruta=servicios&orden=fechacreacion&vista=pendientes";
                   }
                 })
                 break;
@@ -259,7 +259,7 @@ $("#btnCrearServicio").on("click", function(){
                   focusConfirm:true
                   }).then(function(result){
                   if (result.value) {
-                    window.location = "index.php?ruta=servicios&vista=pendiente";
+                    window.location = "index.php?ruta=servicios&vista=pendientes";
                   }
                 })
                 break;
@@ -414,8 +414,8 @@ $("#btnEditarServicio").on("click", function(){
 
       console.log("idServicio", idServicio);
       console.log("editarServicioTelefono", editarServicioTelefono);
-     console.log("editarServicioProblema", editarServicioProblema);
-      console.log("servicioProductoEditarId--->", servicioProductoEditarId);
+      console.log("editarServicioProblema", editarServicioProblema);
+      console.log("servicioProductoEditarId", servicioProductoEditarId);
       console.log("editarServicioInfoProducto", editarServicioInfoProducto);
       console.log("servicioPresupuestoEditar", servicioPresupuestoEditar);
       console.log("servicioPresupuestoEditar", servicioPresupuestoEditar);
@@ -445,13 +445,13 @@ $("#btnEditarServicio").on("click", function(){
                   case "ok":
                       swal({
                       type: "success",
-                      title: "El cliente ha sido MODIFICADO correctamente",
+                      title: "El Servicio ha sido MODIFICADO correctamente",
                       showConfirmButton: true,
                       confirmButtonText: "Cerrar",
                       focusConfirm:true
                       }).then(function(result){
                             if (result.value) {
-                                window.location = "index.php?ruta=servicios&orden=fechacreacion&vista=pendiente";
+                                window.location = "index.php?ruta=servicios&orden=fechacreacion&vista=pendientes";
                             }
                       })
                       break;
@@ -466,7 +466,7 @@ $("#btnEditarServicio").on("click", function(){
                           focusConfirm:true
                       }).then(function(result){
                         if (result.value) {
-                            window.location = "index.php?ruta=servicios&vista=pendiente";
+                            window.location = "index.php?ruta=servicios&vista=pendientes";
                         }
                       })
                     break;
@@ -474,7 +474,7 @@ $("#btnEditarServicio").on("click", function(){
                 case "duplica":
                   swal({
                     type: "error",
-                    title: "¡Ya existe ese cliente! Revise los datos",
+                    title: "¡Ya existe ese Servicio! Revise los datos",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     focusConfirm:true
@@ -552,7 +552,7 @@ $(".tablaServicios tbody").on("click", "button.btnReparar", function(){
                   confirmButtonColor: '#3085d6',
                   cancelButtonColor: '#d33',
                   cancelButtonText: 'Cancelar',
-                  confirmButtonText: 'Si, Enviar servicio!'
+                  confirmButtonText: 'Si, Enviar al servicio tecnico!'
                   }).then(function(result) {
                   if (result.value) {
 
@@ -577,7 +577,7 @@ $(".tablaServicios tbody").on("click", "button.btnReparar", function(){
 
                             swal({
                               type: "success",
-                              title: "El servicio ha sido Enviado correctamente",
+                              title: "Enviado al Servicio Tecnico",
                               showConfirmButton: true,
                               confirmButtonText: "Cerrar"
                               }).then(function(result){
@@ -636,14 +636,14 @@ $(".tablaServicios tbody").on("click", "button.btnAPendiente", function(){
 
          swal({
 
-              title: '¿Repara '+respuesta["producto"]+' \n'+respuesta["cliente"]+'?',
+              title: 'Devuelve '+respuesta["producto"]+' \n'+respuesta["cliente"]+'?\n - - a Pendientes - -',
               text: "¡Si no lo está puede cancelar la accíón!",
               type: 'warning',
                   showCancelButton: true,
                   confirmButtonColor: '#3085d6',
                   cancelButtonColor: '#d33',
                   cancelButtonText: 'Cancelar',
-                  confirmButtonText: 'Si, Enviar servicio!'
+                  confirmButtonText: 'Si, devolver a pendiente!'
                   }).then(function(result) {
                   
                   if (result.value) {
@@ -653,7 +653,6 @@ $(".tablaServicios tbody").on("click", "button.btnAPendiente", function(){
                     datos.append("idServicioCambiarEstado", idServicioEnviarReparar);
                     datos.append("idServicioEstado", 1);//enviamos el 2
                     
-
                     $.ajax({
 
                         url:"ajax/servicios.ajax.php",
@@ -669,14 +668,14 @@ $(".tablaServicios tbody").on("click", "button.btnAPendiente", function(){
 
                             swal({
                               type: "success",
-                              title: "El servicio ha sido Enviado correctamente",
+                              title: "El Trabajo se ha enviado a Pendientes",
                               showConfirmButton: true,
                               confirmButtonText: "Cerrar"
                               }).then(function(result){
                                 
                                 if (result.value) {
 
-                                  window.location = "index.php?ruta=servicios&vista=pendiente";
+                                  window.location = "index.php?ruta=servicios&vista=pendientes";
 
                                 }
 
@@ -690,8 +689,7 @@ $(".tablaServicios tbody").on("click", "button.btnAPendiente", function(){
                                 confirmButtonText: "Cerrar"
                                 }).then(function(result){
                                 if (result.value) {
-
-                                  window.location = "index.php?ruta=servicios&vista=pendiente";
+                                  window.location = "index.php?ruta=servicios&vista=pendientes";
                                 }
                               })
                             }
@@ -776,29 +774,38 @@ $(".btnModalTerminarServicio").on("click",function(){
       console.log('respuesta: ', respuesta);
 
        if(respuesta=="ok"){
-         swal({
-                              type: "success",
-                              title: "El servicio ha Guardado correctamente",
-                              showConfirmButton: true,
-                              confirmButtonText: "Cerrar"
-                              }).then(function(result){
-                                
-                                if (result.value) {
+          
+        if(idEstadoTerminar==2){
 
-                                  if(idEstadoTerminar==2){
+          mensaje = "Se ha agregado algunos datos a este servicio";
 
-                                    window.location = "index.php?ruta=servicios&vista=reparacion";
-
-                                  }else{
-
-                                    window.location = "index.php?ruta=servicios&vista=terminado";
-
-                                  }
+        }else{
+          
+            mensaje =  "El servicio ha sido completado correctamente";
+        }
+          swal({
+            type: "success",
+            title: mensaje,
+            showConfirmButton: true,
+            confirmButtonText: "Cerrar"
+            }).then(function(result){
                                   
+              if (result.value) {
 
-                                }
+                if(idEstadoTerminar==2){
 
-                              })
+                  window.location = "index.php?ruta=servicios&vista=reparacion";
+
+                }else{
+
+                  window.location = "index.php?ruta=servicios&vista=terminado";
+
+                }
+                
+
+              }
+
+            })
        }
           
 
@@ -810,50 +817,86 @@ $(".btnModalTerminarServicio").on("click",function(){
 $(".tablaServicios tbody").on("click", "button.btnAServicio", function () {
       
   var idServicioCambiarEstado = $(this).attr("idServicio");
+  console.log('idServicioCambiarEstado: ', idServicioCambiarEstado);
   var idServicioUsuarioReparar = $(this).attr("idUsuario");
 
-  var datos = new FormData();
-  datos.append("idServicioCambiarEstado", idServicioCambiarEstado);
-  datos.append("idServicioUsuarioReparar", idServicioUsuarioReparar);
-  datos.append("idServicioEstado", 2); //enviamos el 2
+
+  var servicios = new FormData();
+  servicios.append("idVerServicioEditar",  $(this).attr("idServicio"));
+  servicios.append("idSercicioEstado",  3);
 
   $.ajax({
-    url: "ajax/servicios.ajax.php",
-    method: "POST",
-    data: datos,
-    cache: false,
-    contentType: false,
-    processData: false,
-    success: function (respuesta) {
-      console.log("respuesta", respuesta);
+      url:"ajax/servicios.ajax.php",
+      method: "POST",
+      data: servicios,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType:"json",
+      success:function(respuesta){
+        console.log("respuesta", respuesta);
+  
+        swal({
 
-      if (respuesta == "ok") {
-        swal({
-          type: "success",
-          title: "El servicio ha sido Enviado correctamente",
-          showConfirmButton: true,
-          confirmButtonText: "Cerrar",
-        }).then(function (result) {
-          if (result.value) {
-            window.location = "index.php?ruta=servicios&vista=reparacion";
-          }
-        });
-      } else {
-        swal({
-          type: "error",
-          title: "No se puede Enviar",
-          showConfirmButton: true,
-          confirmButtonText: "Cerrar",
-        }).then(function (result) {
-          if (result.value) {
-            window.location = "index.php?ruta=servicios&vista=reparacion";
-          }
-        });
+          title: '¿Devuelve el/la '+respuesta["producto"]+' \n'+respuesta["cliente"]+'?\n - Al Servicio Tecnico -',
+          text: "¡Si no lo está puede cancelar la accíón!",
+          type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              cancelButtonText: 'Cancelar',
+              confirmButtonText: 'Si, lo saco de terminado!'
+              }).then(function(result) {
+               
+                if (result.value) {
+
+                  var datos = new FormData();
+                  datos.append("idServicioCambiarEstado", idServicioCambiarEstado);
+                  datos.append("idServicioUsuarioReparar", idServicioUsuarioReparar);
+                  datos.append("idServicioEstado", 2); //enviamos el 2
+                  $.ajax({
+                    url: "ajax/servicios.ajax.php",
+                    method: "POST",
+                    data: datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (respuesta) {
+                      console.log("respuesta", respuesta);
+                
+                      if (respuesta == "ok") {
+                        swal({
+                          type: "success",
+                          title: "El Trabajo ha sido Enviado al Servicio Tecnico",
+                          showConfirmButton: true,
+                          confirmButtonText: "Cerrar",
+                        }).then(function (result) {
+                          if (result.value) {
+                            window.location = "index.php?ruta=servicios&vista=reparacion";
+                          }
+                        });
+                      } else {
+                        swal({
+                          type: "error",
+                          title: "No se puede Enviar",
+                          showConfirmButton: true,
+                          confirmButtonText: "Cerrar",
+                        }).then(function (result) {
+                          if (result.value) {
+                            window.location = "index.php?ruta=servicios&vista=reparacion";
+                          }
+                        });
+                      }
+                    }, //sucess
+                  }); //ajax
+                }
+             
+              })
+
       }
-    }, //sucess
-  }); //ajax
-});
+  })
 
+})
 
 $(".tablaServicios tbody").on("click", "button.btnEntregado", function () {
   var idServicioCambiarEstado = $(this).attr("idServicio");
@@ -877,7 +920,7 @@ $(".tablaServicios tbody").on("click", "button.btnEntregado", function () {
       if (respuesta == "ok") {
         swal({
           type: "success",
-          title: "El servicio ha sido Enviado correctamente",
+          title: "El servicio Ha sido entregado",
           showConfirmButton: true,
           confirmButtonText: "Cerrar",
         }).then(function (result) {

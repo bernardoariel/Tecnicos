@@ -54,7 +54,7 @@
 
           $item = null;
           $valor = null;
-          $orden = "fechacreacion";
+          $orden = "ultima_fecha";
 
           $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
 

@@ -8,6 +8,41 @@
     
     </h1>
 
+    <!-- seleccionamos el modo -->
+    <div id="divSelectModo" class="pull-left">
+
+      <label for="selectModo"> Estado: </label>
+
+      <select class="form-control input-lg"  id="selectModo">
+        <option value="0">Todos</option>
+        <option value="1">Pendientes</option>
+        <option value="2">En Reparacion</option>
+        <option value="3">Terminado</option>
+        <option value="4">Entregado</option>
+
+      </select>
+
+    </div> 
+
+    <!-- Seleccionamos la fecha-->
+    <div class="form-group pull-left" id="myCalendario">
+      
+      <label for="daterange-btn"> Fecha: </label>
+
+      <div class="input-group">
+        <button type="button" class="btn btn-default form-control input-lg pull-left" id="daterange-btn">
+          <span>
+            <i class="fa fa-calendar"></i> Seleccionar Fecha
+          </span>
+          <i class="fa fa-caret-down"></i>
+        </button>
+      </div>
+    </div>
+    <!-- /.form group -->
+   
+
+    <!-- Creamos un boton -->
+    <button id="btnxls" class="btn btn-success btn-flat form-control input-lg pull-left"><i class="fa fa-file-excel-o"></i> - Descargar</button>
     <ol class="breadcrumb">
       
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -23,7 +58,8 @@
     <div class="box box-danger">
 
       <div class="box-body">
-        
+      
+     
       <table class="table table-bordered table-striped dt-responsive tablaServiciosTodos" width="100%">
 
 <thead>
@@ -43,126 +79,7 @@
 
 </thead>
 
-<tbody>
 
- <?php
-
- $item = null;
- $valor = null;
- $orden = null;
- $forma = null;
- $estado = null;
- if (isset($_GET["orden"])) {
-
-  $orden = $_GET["orden"];
-  $forma = "DESC";
-
- } else {
-
-  $orden = "fecha";
-  $forma = "DESC";
-
- }
-
-
- $serviciosPendientes = ControladorServicios::ctrMostrarServiciosTodos($item, $valor, $orden, $forma, $estado);
-
-
- foreach ($serviciosPendientes as $key => $value) {
-
-  switch ($value['estado']) {
-
-    case 1:
-      
-      $estado = '<span class="label label-info">'.$value['estado'].'-Pendientes</span>';
-      $link = "index.php?ruta=servicios&vista=pendientes";
-      break;
-
-    case 2:
-
-      $estado = '<span class="label label-warning">'.$value['estado'].'-En reparacion</span>';  
-      $link = "index.php?ruta=servicios&vista=reparacion";
-      break;
-
-    case 3:
-
-      $estado = '<span class="label label-success">'.$value['estado'].'-Terminados</span>';  
-      $link = "index.php?ruta=servicios&vista=terminado";
-      break;
-
-    case 4:
-
-      $estado = '<span class="label label-danger">'.$value['estado'].'-Entregados</span>';  
-      $link = 'entregados';
-      break;  
-
-    }
-
-  if ($key == 0 && isset($_GET["orden"])) {
-
-   echo '<tr>
-
-                  <td style="background-color:#E1F5FE;" id="tdenservicio-1">' . ($key + 1) . '</td>
-
-                   <td style="background-color:#E1F5FE;" id="tdenservicio-2">' .substr($value["fechacreacion"], 0, 10).'</td>
-
-                   <td style="background-color:#E1F5FE;" id="tdenservicio-3">' . $value["cliente"] . '</td>
-
-                   <td style="background-color:#E1F5FE;" id="tdenservicio-3">' . $value["telefono"] . '</td>
-
-                   <td style="background-color:#E1F5FE;" id="tdenservicio-3">' . $value["producto"] . '</td>
-
-                   <td style="background-color:#E1F5FE;" id="tdenservicio-4">' . $estado . '</td>
-
-                   <td style="background-color:#E1F5FE;" id="tdenservicio-4">' . $value["precio"] . '</td>
-
-                   <td style="background-color:#E1F5FE;" id="tdenservicio-7">';
-
-   echo '<div class="btn-group">
-                           
-                          
-
-                         </div>';
-
-   echo '  </td>
-
-                 </tr>';
-  } else {
-
-   echo '<tr>
-
-                   <td>' . ($key + 1) . '</td>
-
-                   <td>' . substr($value["fechacreacion"], 0, 10).'</td>
-
-                   <td>' . $value["cliente"] . '</td>
-                   <td>' . $value["telefono"] . '</td>
-                   <td>' . $value["producto"] . '</td>
-                   <td><a href="'.$link.'">' . $estado. '</a></td>
-
-
-                   <td>' . $value["precio"] . '</td>  
-
-                   <td>';
-
-                echo '<div class="btn-group text-center">
-                  <button class="btn btn-default btn-flat btnVerClienteTServicios" data-toggle="modal" data-target="#modalVerCliente" idClienteTServicios="' . $value["id_cliente"] .'" title="ver Cliente"><i class = "fa fa-user"></i></button>         
-               
-                
-                 
-                 <button class="btn btn-danger btnEntregado btn-flat" idServicio="' . $value["id"] . '" idUsuario="' . $_SESSION["id"] . '" title="impresion"><i class="fa fa-print"></i></button>    
-                         
-          </div>';
-
-   echo '</td>
-   
-               </tr>';
-  }
- } // foreach
-
- ?>
-
-</tbody>
 
 </table>
 
@@ -283,3 +200,33 @@
 
 </div>
 
+<script>
+moment.locale('es');
+$('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Hoy'       : [moment(), moment()],
+          'Ayer'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Ultimos 7 Dias' : [moment().subtract(6, 'days'), moment()],
+          'Los Ultimos 30 Dias': [moment().subtract(29, 'days'), moment()],
+          'Este Mes'  : [moment().startOf('month'), moment().endOf('month')],
+          'Ultimo Mes'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        
+        tServFecha1=start.format('YYYY-MM-DD');
+      
+        tServFecha2=end.format('YYYY-MM-DD');
+
+        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+
+        table.clear().draw();
+        urlNueva="ajax/tabla-tls.ajax.php?tServEstado="+tServEstado+"&tServFecha1="+tServFecha1+"&tServFecha2="+tServFecha2;
+
+        table.ajax.url( urlNueva).load();
+      }
+    )
+</script>
