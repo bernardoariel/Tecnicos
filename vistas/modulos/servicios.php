@@ -6,50 +6,45 @@
     $vista = $_GET["vista"];
     $vista1= $_GET["vista"];
 
+    $solapa1 = "1: pendientes";
+    $solapa2 = "2: reparacion";
+    $solapa3 = "3: terminados";
+
+    $nombreSolapa1 = "pendientes";
+    $nombreSolapa2 = "reparacion";
+    $nombreSolapa3 = "terminado";
+
+    
+    $solapa1Color = '<style>.nav-tabs-custom > .nav-tabs > li.active {border-top-color: #1266F1;}</style>';
+    $solapa2Color = '<style>.nav-tabs-custom > .nav-tabs > li.active {border-top-color: #FFA900;}</style>';
+    $solapa3Color = '<style>.nav-tabs-custom > .nav-tabs > li.active {border-top-color: #00B74A;}</style>';
+
+    $clase1 = "";
+    $clase2 = "";
+    $clase3 = "";
+    $bndActive=0;
+    
+    
     switch ($vista) {
 
       case 'pendientes':
-        
-        $vista1Nombre = "1: pendientes";
-        $vista2 = "reparacion";
-        $vista3 = "terminado";
-        $vista2Nombre = "2: reparacion";
-        $vista3Nombre = "3: terminado";
-        echo '<style>.nav-tabs-custom > .nav-tabs > li.active {
-          border-top-color: #1266F1;}</style>';
+        $clase1="active";
+        echo '<style>.nav-tabs-custom > .nav-tabs > li.active {border-top-color: #1266F1;}</style>';
         break;
 
       case 'reparacion':
-        $vista1Nombre= "2: ".$_GET["vista"];
-        $vista2 = 'pendientes';
-        $vista3 = "terminado";
-        $vista2Nombre = '1: pendientes';
-        $vista3Nombre = "3: terminado";
-        echo '<style>.nav-tabs-custom > .nav-tabs > li.active {
-          border-top-color: #FFA900;}</style>';
+        $clase2="active";
+        echo '<style>.nav-tabs-custom > .nav-tabs > li.active {border-top-color: #FFA900;}</style>';
+      
         break;
 
       case 'terminado':
-        $vista1Nombre= "3: ".$_GET["vista"];
-        $vista2 = 'pendientes';
-        $vista3 = 'reparacion';
-        $vista2Nombre = '1: pendientes';
-        $vista3Nombre = '2: reparacion';
-        echo '<style>.nav-tabs-custom > .nav-tabs > li.active {
-          border-top-color: #00B74A;}</style>';
+        $clase3="active";
+        echo '<style>.nav-tabs-custom > .nav-tabs > li.active {border-top-color: #00B74A;}</style>';
+        
         break;
 
     }
-
-  }else{
-    
-    $vista = "pendientes";
-    $vista1 = "1: pendientes";
-    $vista2 = "2: reparacion";
-    $vista3 = "3: terminado";
-    $vista1Nombre = "1: pendientes";
-    $vista2Nombre = "2: reparacion";
-    $vista3Nombre = "3: terminado";
 
   }
   
@@ -80,46 +75,43 @@
 
     <div class="box box-danger">
 
-      
-
       <div class="box-body">
 
         <section class="col-lg-12 connectedSortable">
-          <!-- Custom tabs (Charts with tabs)-->
+          
           <div class="nav-tabs-custom">
-            <!-- Tabs within a box -->
-            <ul class="nav nav-tabs pull-right">
-              <li class="active" id="li<?php echo $vista1; ?>"><a href="#<?php echo $vista1; ?>"  data-toggle="tab"><?php echo $vista1Nombre; ?></a></li>
-              <li id="li<?php echo $vista2; ?>"><a href="#<?php echo $vista2; ?>" data-toggle="tab"><?php echo $vista2Nombre; ?></a></li>
-              <li id="li<?php echo $vista3; ?>"><a href="#<?php echo $vista3; ?>" data-toggle="tab"><?php echo $vista3Nombre; ?></a></li>
-              <button class="btn btn-danger pull-left btn-flat" data-toggle="modal" data-target="#modalAgregarServicio">
+          
+              <ul class="nav nav-tabs pull-right">
+                <li class="<?php echo $clase1;?>"><a href="#<?php echo $nombreSolapa1;?>" id="solapa1" data-toggle="tab"><?php echo $solapa1; ?></a></li>
+                <li class="<?php echo $clase2;?>"><a href="#<?php echo $nombreSolapa2;?>" id="solapa2" data-toggle="tab"><?php echo $solapa2; ?></a></li>
+                <li class="<?php echo $clase3;?>"><a href="#<?php echo $nombreSolapa3;?>" id="solapa3" data-toggle="tab"><?php echo $solapa3; ?></a></li>
+                <button class="btn btn-danger pull-left btn-flat" data-toggle="modal" data-target="#modalAgregarServicio">
                 Agregar servicios
               </button>
+                <li class="header pull-left" ><i class="fa fa-inbox"></i> Servicios</li>
+              </ul>
 
-              <li class="header pull-left" ><i class="fa fa-inbox"></i> Servicios</li>
-            </ul>
-            
-            <div class="tab-content ">
-              <!-- Morris chart - Sales -->
-              <div class="chart tab-pane active" id="<?php echo $vista1; ?>" style="position: relative;">
-                <?php
-                include("servicios/".$vista1.".php");
-                ?>
+              <div class="tab-content">
+                <!-- Panel 1 -->
+                <div class="active tab-pane" id="tab1">
+
+                  <?php
+                 
+                  
+
+                    include('vistas/modulos/servicios/servicios.php');
+
+                
+                    
+                  ?>
+
+                </div>
+                <!-- /.tab-pane -->
+
               </div>
-              <div class="chart tab-pane" id="<?php echo $vista2; ?>" style="position: relative;">
-                <?php
-                include("servicios/".$vista2.".php");
-                ?>
-              </div>
-              <div class="chart tab-pane" id="<?php echo $vista3; ?>" style="position: relative;">
-                <?php
-                include("servicios/".$vista3.".php");
-                ?>
-              </div>
+              <!-- /.tab-content -->
             </div>
-          </div>
           <!-- /.nav-tabs-custom -->
-
 
         </section>
       </div>

@@ -898,6 +898,7 @@ $(".tablaServicios tbody").on("click", "button.btnAServicio", function () {
 
 })
 
+
 $(".tablaServicios tbody").on("click", "button.btnEntregado", function () {
   var idServicioCambiarEstado = $(this).attr("idServicio");
   var idServicioUsuarioReparar = $(this).attr("idUsuario");
@@ -925,7 +926,29 @@ $(".tablaServicios tbody").on("click", "button.btnEntregado", function () {
           confirmButtonText: "Cerrar",
         }).then(function (result) {
           if (result.value) {
-            window.location = "index.php?ruta=servicios&vista=terminado";
+            var mensaje = new FormData();
+            mensaje.append("idServicioMensaje", idServicioCambiarEstado);
+            mensaje.append("servicioMensaje", 4);//terminado
+            $.ajax({
+              url: "ajax/mensajes.ajax.php",
+              method: "POST",
+              data: mensaje,
+              cache: false,
+              contentType: false,
+              processData: false,
+              dataType:"json",
+              success: function (respuesta) {
+               
+              console.log('respuesta: ', respuesta);
+              window.open('https://api.whatsapp.com/send?phone='+respuesta['telefono']+'&text='+respuesta['mensaje']+'', '_blank');
+              // window.location = "index.php?ruta=servicios&vista=terminado";
+              }
+
+            })
+            
+            
+            
+            
           }
         });
       } else {
@@ -944,27 +967,58 @@ $(".tablaServicios tbody").on("click", "button.btnEntregado", function () {
   }); //ajax
 })
 
-$("#literminado").on("click", ()=>{
- 
-  $("#literminado").css({"border-top-color":"#00B74A"});
-  $("#lipendientes").css({"border-top-color":"#FFF"});
-  $("#lireparacion").css({"border-top-color":"#FFF"});
 
-});
 
-$("#lipendientes").on("click", ()=>{
+$("#solapa1").on("click", function(){
 
-  $("#lipendientes").css({"border-top-color":"#1266F1"});
-  
-  $("#literminado").css({"border-top-color":"#FFF"});
-  $("#lireparacion").css({"border-top-color":"#FFF"});
+  $(this).parent().css({"border-top-color":"#1266F1"});
+  $("#solapa2").parent().css({"border-top-color":"#FFF"});
+  $("#solapa3").parent().css({"border-top-color":"#FFF"});
 
+  $.ajax({
+    url:"vistas/modulos/servicios/pendientes.php",
+    method: "POST",
+    
+    success:function(respuesta){
+      // VEO LA RESPUESTA
+          
+      $("#tab1").html(respuesta);
+
+    }//SUCESS
+  })//AJAX
 })
 
-$("#lireparacion").on("click", ()=>{
+$("#solapa2").on("click", function(){
+  $(this).parent().css({"border-top-color":"#FFA900"});
+  $("#solapa1").parent().css({"border-top-color":"#FFF"});
+  $("#solapa3").parent().css({"border-top-color":"#FFF"});
+  $.ajax({
+    url:"vistas/modulos/servicios/reparacion.php",
+    method: "POST",
+    
+    success:function(respuesta){
+      // VEO LA RESPUESTA
+          
+      $("#tab1").html(respuesta);
 
-  $("#lireparacion").css({"border-top-color":"#FFA900"});
-  $("#lipendientes").css({"border-top-color":"#FFF"});
-  $("#literminado").css({"border-top-color":"#FFF"});
+    }//SUCESS
+  })//AJAX
+})
 
+
+$("#solapa3").on("click", function(){
+  $(this).parent().css({"border-top-color":"#00B74A"});
+  $("#solapa1").parent().css({"border-top-color":"#FFF"});
+  $("#solapa2").parent().css({"border-top-color":"#FFF"});
+  $.ajax({
+    url:"vistas/modulos/servicios/terminado.php",
+    method: "POST",
+    
+    success:function(respuesta){
+      // VEO LA RESPUESTA
+          
+      $("#tab1").html(respuesta);
+
+    }//SUCESS
+  })//AJAX
 })

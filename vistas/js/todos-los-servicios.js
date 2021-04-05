@@ -70,18 +70,7 @@ $(".dataTables_length").remove();
 $("#DataTables_Table_0_filter").children().children().removeClass("input-sm");
 $("#DataTables_Table_0_filter").children().children().addClass("input-lg");
 
-//creo referencia padre
-var divPrincipal = document.getElementById("DataTables_Table_0_filter");
-var mySel = document.getElementById("divSelectModo");
-var myCalendario = document.getElementById("myCalendario");
-// let myBotonBsq = document.getElementById("btnBuscar");
-let myBotonXls = document.getElementById("btnxls");
-// creo un elemento 
-// var select = document.createElement('select');  
-divPrincipal.appendChild(mySel);
-divPrincipal.appendChild(myCalendario);
-// divPrincipal.appendChild(myBotonBsq);
-divPrincipal.appendChild(myBotonXls);
+
 
 
 

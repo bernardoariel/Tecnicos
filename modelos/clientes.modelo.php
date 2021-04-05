@@ -48,13 +48,16 @@ class ModeloClientes{
 
 	static public function mdlEditarCliente($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, direccion = :direccion , telefono = :telefono, obs =:editarObs WHERE id = :id");
-
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, direccion = :direccion , telefono = :telefono, obs =:editarObs,cod_pais=:cod_pais, whatsapp =:whatsapp, email =:email WHERE id = :id");
+		
 		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
 		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
 		$stmt->bindParam(":editarObs", $datos["editarObs"], PDO::PARAM_STR);
+		$stmt->bindParam(":cod_pais", $datos["cod_pais"], PDO::PARAM_INT);
+		$stmt->bindParam(":whatsapp", $datos["whatsapp"], PDO::PARAM_STR);
+		$stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
 

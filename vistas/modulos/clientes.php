@@ -44,7 +44,9 @@
            <th style="width:10px">#</th>
            <th>Nombre</th>
            <th>Direccion</th>
-           <th>Telefono</th>
+           <th>Telefono</th>  
+           <th>WhatsApp</th>  
+           <th>Email</th>  
            <th>Obs</th>
            <th>Acciones</th>
 
@@ -73,6 +75,8 @@
           $clientes = ControladorClientes::ctrMostrarClientes($item, $valor, $orden,$forma);
 
           foreach ($clientes as $key => $value) {
+
+            
             
             if($key==0 && isset($_GET["orden"])){
 
@@ -84,14 +88,21 @@
 
                     <td style="background-color:#E1F5FE;" id="tdclientes-3">'.$value["direccion"].'</td>
 
-                    <td style="background-color:#E1F5FE;" id="tdclientes-4">'.$value["telefono"].'</td>
+                    <td style="background-color:#E1F5FE;" id="tdclientes-4">'.$value["cod_pais"]." - ".$value["telefono"].'</td>
 
-                    <td style="background-color:#E1F5FE;" id="tdclientes-5">'.$value["obs"].'</td>
+                    <td style="background-color:#E1F5FE;" id="tdclientes-5">'.$value["whatsapp"].'</td>
 
                     <td style="background-color:#E1F5FE;" id="tdclientes-6">';
 
-                  if($value["id"]>2){
+                    if($value["email"]){echo $value["email"];}else{echo "NO POSEE";}
+                    
+                    echo '</td>
 
+                    <td style="background-color:#E1F5FE;" id="tdclientes-7">'.$value["obs"].'</td>
+
+                    <td style="background-color:#E1F5FE;" id="tdclientes-8">';
+
+                  
                     echo '<div class="btn-group">
                             
                             <button class="btn btn-warning btn-flat btnVerClienteEditar" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
@@ -99,7 +110,7 @@
                             <button class="btn btn-danger btn-flat btnEliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>
 
                           </div>'; 
-                  }   
+                  
 
             echo '  </td>
 
@@ -115,8 +126,16 @@
 
                     <td>'.$value["direccion"].'</td>
 
-                    <td>'.$value["telefono"].'</td>
+                    <td>'.$value["cod_pais"]." - ".$value["telefono"].'</td>
 
+                    <td>'.$value["whatsapp"].'</td>
+                  
+
+                    <td>';
+
+                    if($value["email"]){echo $value["email"];}else{echo "NO POSEE";}
+                    
+                    echo '</td>
                     <td>'.$value["obs"].'</td>
 
                     <td>';
@@ -294,7 +313,7 @@
 
               <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-5">
 
                   <div class="input-group">
                 
@@ -311,7 +330,7 @@
                 
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-7">
 
                   <!-- ENTRADA PARA SELECCIONAR SU TIPO DE IVA -->
                   <div class="form-group">
@@ -498,7 +517,7 @@
 
               <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-5">
 
                   <div class="input-group">
                 
@@ -513,7 +532,7 @@
                 
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-7">
 
                   <!-- ENTRADA PARA SELECCIONAR SU TIPO DE IVA -->
                   <div class="form-group">

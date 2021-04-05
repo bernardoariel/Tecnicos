@@ -36,11 +36,11 @@ class ControladorClientes{
 
 			   	$tabla = "clientes";
 	   
-			   	$datos = array("id"=>$datos["id"],
-			   				   "nombre"=>strtoupper($datos["nombre"]),
-					           "direccion"=>strtoupper($datos["direccion"]),
-					           "telefono"=>$datos["telefono"],
-					           "editarObs"=>strtoupper($datos["obs"]));
+			   	// $datos = array("id"=>$datos["id"],
+			   	// 			   "nombre"=>strtoupper($datos["nombre"]),
+				// 	           "direccion"=>strtoupper($datos["direccion"]),
+				// 	           "telefono"=>$datos["telefono"],
+				// 	           "editarObs"=>strtoupper($datos["obs"]));
 
 			  	$respuesta = ModeloClientes::mdlEditarCliente($tabla, $datos);
 			   	//doy la respuesta ok/error

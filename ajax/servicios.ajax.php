@@ -205,9 +205,9 @@ class AjaxServicios{
                   "id_usuario" => $this->idServicioUsuarioReparar,
                   "estado" => $this->idServicioEstado
             );
-
+            
             $respuesta = ControladorServicios::ctrEnviarRepararServicio($datos);
-
+            
             echo $respuesta;
       }
  /*=============================================

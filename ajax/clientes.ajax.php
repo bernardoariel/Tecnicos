@@ -32,12 +32,15 @@ class AjaxClientes{
   public $editarDireccion;
   public $editarTelefono;
   public $editarObs;
+  public $editarCodPais;
+  public $editarWs;
+  public $editarEmail;
 
   public function ajaxEditarCliente(){
 
     //VEO SI EXISTE
     $existe = ModeloClientes::mdlMostrarClientesNotIN("clientes",  $this->idCliente,strtoupper($this->editarCliente));
-
+    
     
     if(empty($existe)){
 
@@ -45,7 +48,11 @@ class AjaxClientes{
                      "nombre" => strtoupper($this->editarCliente),
                      "direccion"=>strtoupper($this->editarDireccion),
                      "telefono"=>strtoupper($this->editarTelefono),
-                     "obs"=>strtoupper($this->editarObs));
+                     "obs"=>strtoupper($this->editarObs),
+                     "cod_pais"=>$this->editarCodPais,
+                     "whatsapp"=>$this->editarWs,
+                     "email"=>strtoupper($this->editarEmail)
+                    );
 
       $respuesta = ControladorClientes::ctrEditarCliente($datos);
 
@@ -83,11 +90,20 @@ class AjaxClientes{
 
     if(empty($clientes)){
 
+      if(strlen($this->nuevoEmail)<3){
+
+        $email = null;
+
+      }else{
+
+        $email =strtoupper($this->nuevoEmail);
+        
+      }
     	$datos = array("nombre" => strtoupper($this->nuevoCliente),
                	   "direccion"=>strtoupper($this->nuevaDireccion),
                     "cod_pais"=>strtoupper($this->nuevoCodPais),
                	   "telefono"=>strtoupper($this->nuevoTelefono),
-               	   "email"=>strtoupper($this->nuevoEmail),
+               	   "email"=>$email,
                	   "whatsapp"=>strtoupper($this->nuevoWs),
                	   "obs"=>strtoupper($this->nuevoObs));
 
@@ -141,6 +157,9 @@ if(isset($_POST["editarCliente"])){
 	$editarCliente -> editarDireccion = $_POST["editarDireccion"];
 	$editarCliente -> editarTelefono = $_POST["editarTelefono"];
 	$editarCliente -> editarObs = $_POST["editarObs"];
+	$editarCliente -> editarCodPais = $_POST["editarCodPais"];
+	$editarCliente -> editarWs = $_POST["editarWs"];
+	$editarCliente -> editarEmail = $_POST["editarEmail"];
 
 	$editarCliente -> ajaxEditarCliente();
 

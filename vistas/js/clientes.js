@@ -49,6 +49,9 @@ function cambiarColor(){
   $("#tdclientes-4").css("background-color","#F9F9F9");
   $("#tdclientes-5").css("background-color","#F9F9F9");
   $("#tdclientes-6").css("background-color","#F9F9F9");
+  $("#tdclientes-7").css("background-color","#F9F9F9");
+  $("#tdclientes-8").css("background-color","#F9F9F9");
+  $("#tdclientes-9").css("background-color","#F9F9F9");
 
 }
 
@@ -61,7 +64,7 @@ VER CLIENTES
 $(".tablaClientes").on("click", ".btnVerClienteEditar", function(){
   //TOMO LA VARIABLE DEL BOTON
   var idVerClienteEditar = $(this).attr("idCliente");
-idVerClienteEditar
+
 
   // LOS CARGO EN EL FORMDATA DE UN AJAX
   var datos = new FormData();
@@ -84,6 +87,20 @@ idVerClienteEditar
         $("#editarDireccion").val(respuesta["direccion"]);
         $("#editarTelefono").val(respuesta["telefono"]);
         $("#editarObs").val(respuesta["obs"]);
+        //VALIDAR EL EMAIL
+        if(respuesta['email']==null){
+          $("#editarEmail").val("No Posee");
+        }else{
+          $("#editarEmail").val(respuesta['email']);
+        }
+        if(respuesta['whatsapp']=="NO"){
+          $("#editarWs").prop("checked",false);
+        }else{
+          $("#editarWs").prop("checked",true);
+        }
+        
+        //VALIDAR EL TRUE
+
       }//SUCESS
   })//AJAX
 
@@ -95,11 +112,41 @@ EDITAMOS CLIENTE CON AJAX
 $("#btnEditarCliente").on("click", function(){
   //TOMO LA VARIABLE DEL BOTON
   var idCliente = $("#idClienteEditar").val();
-  console.log("idCliente", $("#idClienteEditar").val());
   var editarCliente = $("#editarCliente").val(); 
   var editarDireccion = $("#editarDireccion").val();
   var editarTelefono = $("#editarTelefono").val();
   var editarObs = $("#editarObs").val();
+  
+  let editarCodPais = $('#editarCodPais').val();
+  let editarWs;
+  if( $('#editarWs').is(':checked') ) {
+
+    editarWs  = "SI";
+
+  }else{
+
+     editarWs ="NO";
+    
+  }
+if($('#editarConsultaMail').val() == "si"){
+    
+    if($("#editarEmail").val().indexOf('@', 0) == -1 || $("#editarEmail").val().indexOf('.', 0) == -1) {
+      
+      swal({
+        title: "Error!",
+        text: "Ingrese un Correo Valido",
+        icon: "danger",
+        button: "Continuar",
+      });
+
+      return false;
+
+    }
+
+}
+console.log('editarEmail: ', $('#editarEmail').val());  
+
+ 
   // LOS CARGO EN EL FORMDATA DE UN AJAX
   var datos = new FormData();
   datos.append("idCliente", idCliente);
@@ -107,6 +154,9 @@ $("#btnEditarCliente").on("click", function(){
   datos.append("editarDireccion", editarDireccion);
   datos.append("editarTelefono", editarTelefono);
   datos.append("editarObs", editarObs);
+  datos.append("editarCodPais", editarCodPais);
+  datos.append("editarWs", editarWs);
+  datos.append("editarEmail", $('#editarEmail').val());
   //HAGO UN AJAX SIN JSON
   $.ajax({
       url:"ajax/clientes.ajax.php",
@@ -187,14 +237,23 @@ AGREGAR CLIENTE
 =============================================*/
 $("#btnCrearCliente").on("click",function(){
   // TOMO LOS VALORES QUE VOY A AGREGAR DESDE LOS INPUTS
-  var nuevoCliente= $('#nuevoCliente').val();
-  var nuevaDireccion = $('#nuevaDireccion').val();
-  var nuevoTelefono = $('#nuevoTelefono').val();
-  var nuevoObs = $('#nuevoObs').val();
+  let nuevoCliente= $('#nuevoCliente').val();
+  let nuevaDireccion = $('#nuevaDireccion').val();
+  let nuevoTelefono = $('#nuevoTelefono').val();
+  let nuevoObs = $('#nuevoObs').val();
+  let nuevoCodPais = $('#nuevoCodPais').val();
+  let nuevoWs;
+  if( $('#nuevoWs').is(':checked') ) {
 
-  var nuevoCodPais = $('#nuevoCodPais').val();
-  
-  var nuevoWs = document.getElementById("editarChkCodPais").checked;
+    nuevoWs  = "SI";
+
+  }else{
+
+     nuevoWs ="NO";
+    
+  }
+
+
  
   var nuevoEmail = $('#nuevoEmail').val();
   
@@ -205,7 +264,7 @@ $("#btnCrearCliente").on("click",function(){
   datos.append("nuevoTelefono", nuevoTelefono);
   datos.append("nuevoObs", nuevoObs);
   datos.append("nuevoCodPais", nuevoCodPais);
-  datos.append("nuevoWs", nuevoWs);
+  datos.append("nuevoWs",nuevoWs );
   datos.append("nuevoEmail", nuevoEmail);
   //HAGO UN AJAX 
   $.ajax({
@@ -498,7 +557,7 @@ $("#nuevoConsultaMail").on("change", function(){
 
 $("#editarChkCodPais").on("change", function(){
  
-  let chk=document.getElementById("editarChkCodPais").checked
+  
 
   if(chk){
 
